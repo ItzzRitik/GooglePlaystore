@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.pushpal.googleplayclone.R;
+import in.sanrakshak.googleplaystore    .R;
 
 import java.util.ArrayList;
 
