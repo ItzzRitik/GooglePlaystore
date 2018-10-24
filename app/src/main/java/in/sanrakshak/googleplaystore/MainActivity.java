@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
 
+import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
+import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

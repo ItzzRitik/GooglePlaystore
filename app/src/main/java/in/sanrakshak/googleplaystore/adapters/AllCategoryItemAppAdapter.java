@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.models.AllCategoryItemAppModel;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.models.AllCategoryItemAppModel;
 
 import java.util.ArrayList;
 
