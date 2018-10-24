@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.adapters.ViewPagerAdapter;
-import com.pushpal.googleplayclone.fragments.home.HomeCategoriesFragment;
-import com.pushpal.googleplayclone.fragments.home.HomeForYouFragment;
-import com.pushpal.googleplayclone.fragments.home.HomeTopChartsFragment;
-import com.pushpal.googleplayclone.viewPager.CustomViewPager;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
+import in.sanrakshak.googleplaystore.fragments.home.HomeCategoriesFragment;
+import in.sanrakshak.googleplaystore.fragments.home.HomeForYouFragment;
+import in.sanrakshak.googleplaystore.fragments.home.HomeTopChartsFragment;
+import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 
 import java.util.Objects;
 
