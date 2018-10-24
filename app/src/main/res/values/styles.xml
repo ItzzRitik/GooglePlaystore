@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TabLayoutStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="NavigationView">
+        <item name="android:listDivider">@color/colorVeryLightGrey</item>
+    </style>
+
 </resources>
