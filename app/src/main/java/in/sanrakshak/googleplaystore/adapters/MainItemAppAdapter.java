@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.activities.AppActivity;
-import com.pushpal.googleplayclone.models.MainItemAppModel;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.AppActivity;
+import in.sanrakshak.googleplaystore.models.MainItemAppModel;
 
 import java.util.ArrayList;
 
