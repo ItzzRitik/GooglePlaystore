@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.adapters.TopFreeAppsAdapter;
-import com.pushpal.googleplayclone.models.TopFreeAppModel;
+import in.sanrakshak.googleplaystore.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import in.sanrakshak.googleplaystore.adapters.TopFreeAppsAdapter;
+import in.sanrakshak.googleplaystore.models.TopFreeAppModel;
 
 public class TopFreeAppsFragment extends Fragment {
 
