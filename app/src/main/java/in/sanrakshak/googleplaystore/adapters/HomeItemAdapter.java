@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.models.HomeItemModel;
-import com.pushpal.googleplayclone.models.MainItemAppModel;
-import com.pushpal.googleplayclone.models.PopularItemAppModel;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.models.HomeItemModel;
+import in.sanrakshak.googleplaystore.models.MainItemAppModel;
+import in.sanrakshak.googleplaystore.models.PopularItemAppModel;
 
 import java.util.ArrayList;
 
