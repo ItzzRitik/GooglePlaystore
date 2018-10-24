@@ -1,4 +1,4 @@
-package in.sanrakshak.googleplaystore;
+package in.sanrakshak.googleplaystore.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.pushpal.googleplayclone.R;
 import com.pushpal.googleplayclone.models.PopularItemAppModel;
 
 import java.util.ArrayList;

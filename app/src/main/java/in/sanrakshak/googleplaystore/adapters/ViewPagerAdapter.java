@@ -1,4 +1,4 @@
-package in.sanrakshak.googleplaystore;
+package in.sanrakshak.googleplaystore.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

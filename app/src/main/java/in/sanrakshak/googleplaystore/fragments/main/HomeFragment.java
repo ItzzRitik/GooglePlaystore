@@ -1,4 +1,4 @@
-package in.sanrakshak.googleplaystore;
+package in.sanrakshak.googleplaystore.fragments.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.pushpal.googleplayclone.R;
+import com.pushpal.googleplayclone.adapters.ViewPagerAdapter;
 import com.pushpal.googleplayclone.fragments.home.HomeCategoriesFragment;
 import com.pushpal.googleplayclone.fragments.home.HomeForYouFragment;
 import com.pushpal.googleplayclone.fragments.home.HomeTopChartsFragment;
+import com.pushpal.googleplayclone.viewPager.CustomViewPager;
 
 import java.util.Objects;
 

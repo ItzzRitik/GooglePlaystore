@@ -1,4 +1,4 @@
-package in.sanrakshak.googleplaystore;
+package in.sanrakshak.googleplaystore.viewPager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

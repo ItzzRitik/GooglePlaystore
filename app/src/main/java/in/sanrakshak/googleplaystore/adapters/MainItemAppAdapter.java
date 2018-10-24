@@ -1,4 +1,4 @@
-package in.sanrakshak.googleplaystore;
+package in.sanrakshak.googleplaystore.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.pushpal.googleplayclone.R;
 import com.pushpal.googleplayclone.activities.AppActivity;
 import com.pushpal.googleplayclone.models.MainItemAppModel;
 
