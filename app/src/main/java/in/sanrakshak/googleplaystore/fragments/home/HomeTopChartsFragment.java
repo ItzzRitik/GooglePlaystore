@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.adapters.ViewPagerAdapter;
-import com.pushpal.googleplayclone.fragments.home.topCharts.TopFreeAppsFragment;
-import com.pushpal.googleplayclone.viewPager.CustomViewPager;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
+import in.sanrakshak.googleplaystore.fragments.home.topCharts.TopFreeAppsFragment;
+import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 
 import java.util.Objects;
 
