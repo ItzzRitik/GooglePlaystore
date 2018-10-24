@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.models.AppReviewItemModel;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.models.AppReviewItemModel;
 
 import java.util.ArrayList;
 
