@@ -56,7 +56,7 @@
                 app:tabSelectedTextColor="@color/colorPrimary"
                 app:tabTextAppearance="@style/SubTabLayoutStyle" />
 
-            <com.pushpal.googleplayclone.viewPager.CustomViewPager
+            <in.sanrakshak.googleplaystore.viewPager.CustomViewPager
                 android:id="@+id/vp_app_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
