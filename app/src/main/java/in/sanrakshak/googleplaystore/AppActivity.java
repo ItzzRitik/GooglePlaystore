@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.pushpal.googleplayclone.adapters.AppReviewsAdapter;
-import com.pushpal.googleplayclone.adapters.AppScreenshotsAdapter;
-import com.pushpal.googleplayclone.models.AppReviewItemModel;
+import in.sanrakshak.googleplaystore.adapters.AppReviewsAdapter;
+import in.sanrakshak.googleplaystore.adapters.AppScreenshotsAdapter;
+import in.sanrakshak.googleplaystore.models.AppReviewItemModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
