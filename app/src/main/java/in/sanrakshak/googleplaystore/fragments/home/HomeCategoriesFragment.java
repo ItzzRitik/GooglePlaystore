@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.adapters.AllCategoryItemAppAdapter;
-import com.pushpal.googleplayclone.adapters.TopCategoryItemAppAdapter;
-import com.pushpal.googleplayclone.models.AllCategoryItemAppModel;
-import com.pushpal.googleplayclone.models.TopCategoryItemAppModel;
+import in.sanrakshak.googleplaystore.R;
 
 import java.util.ArrayList;
+
+import in.sanrakshak.googleplaystore.adapters.AllCategoryItemAppAdapter;
+import in.sanrakshak.googleplaystore.adapters.TopCategoryItemAppAdapter;
+import in.sanrakshak.googleplaystore.models.AllCategoryItemAppModel;
+import in.sanrakshak.googleplaystore.models.TopCategoryItemAppModel;
 
 public class HomeCategoriesFragment extends Fragment {
 
