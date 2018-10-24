@@ -44,7 +44,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <in.sanrakshak.googleplaystore.CustomViewPager
+        <in.sanrakshak.googleplaystore.viewPager.CustomViewPager
             android:id="@+id/mainViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
