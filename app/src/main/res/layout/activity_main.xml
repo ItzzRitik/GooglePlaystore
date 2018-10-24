@@ -28,7 +28,7 @@
                 app:floatingSearch_searchBarMarginLeft="5dp"
                 app:floatingSearch_searchBarMarginRight="5dp"
                 app:floatingSearch_searchBarMarginTop="5dp"
-                app:floatingSearch_searchHint="Google Play Clone"
+                app:floatingSearch_searchHint="Google Play"
                 app:floatingSearch_showSearchKey="false"
                 app:floatingSearch_suggestionsListAnimDuration="250" />
 
