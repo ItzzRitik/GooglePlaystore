@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pushpal.googleplayclone.R;
-import com.pushpal.googleplayclone.adapters.HomeItemAdapter;
-import com.pushpal.googleplayclone.models.HomeItemModel;
+import in.sanrakshak.googleplaystore.R;
+import in.sanrakshak.googleplaystore.adapters.HomeItemAdapter;
+import in.sanrakshak.googleplaystore.models.HomeItemModel;
 
 import java.util.ArrayList;
 
