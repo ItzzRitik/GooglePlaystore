@@ -93,6 +93,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="#ffffff"
         android:theme="@style/NavigationView"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_nav_drawer" />
