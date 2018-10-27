@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     int cx = g_sign_pane.getWidth()/2;
                     int cy = g_sign_pane.getHeight()-dptopx(130);
                     Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
-                    animator.setDuration(300);
+                    animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                    animator.setDuration(500);
                     animator.addListener(new Animator.AnimatorListener() {
                         @Override public void onAnimationStart(Animator animator) {}
                         @Override public void onAnimationCancel(Animator animator) {}
@@ -192,8 +194,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
-                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign_pane.getHeight(),0);
-                animator.setDuration(300);
+                Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign_pane.getHeight(),0);
+                animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                animator.setDuration(500);
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
                     @Override public void onAnimationCancel(Animator animator) {}
@@ -203,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onAnimationEnd(Animator animator) {
                         g_sign_pane2.setVisibility(View.GONE);
                         g_sign.setVisibility(View.GONE);
-                        g_sign_pane.animate().translationY(-g_sign_pane.getHeight()).setDuration(800);
+                        g_sign_pane.animate().translationY(-g_sign_pane.getHeight()).setDuration(500);
                     }
                 });
                 animator.start();
