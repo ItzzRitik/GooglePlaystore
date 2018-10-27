@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(View view) {
                     int cx = g_sign_pane.getWidth()/2;
-                    int cy = g_sign.getBottom()-dptopx(30);
+                    int cy = g_sign.getBottom()-(g_sign.getHeight()/2);
                     Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());
                     animator.setDuration(500);
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getCover(account.getId());
 
                 int cx = g_sign_pane.getWidth()/2;
-                int cy = g_sign_pane.getHeight()-(g_sign.getHeight()/2);
+                int cy = g_sign.getBottom()-(g_sign.getHeight()/2);
                 Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign_pane.getHeight(),0);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.setDuration(500);
