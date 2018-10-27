@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemIconTintList(null);
 
         de.hdodenhof.circleimageview.CircleImageView profileImageView = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
-        Glide.with(this)
-                .load(R.drawable.profile_image)
-                .into(profileImageView);
+//        Glide.with(this)
+//                .load(R.drawable.profile_image)
+//                .into(profileImageView);
 
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
     }
