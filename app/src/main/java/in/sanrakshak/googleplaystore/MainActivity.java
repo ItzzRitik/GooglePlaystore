@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .requestEmail()
                 .build();
         client = GoogleSignIn.getClient(this, gso);
-        g_sign_pane=findViewById(R.id.g_sign_pane);
 
         if(GoogleSignIn.getLastSignedInAccount(this)==null){
             icon_green=findViewById(R.id.icon_green);
+            g_sign_pane=findViewById(R.id.g_sign_pane);
             g_sign_pane2=findViewById(R.id.g_sign_pane2);
             g_sign=findViewById(R.id.g_sign);
             g_sign.setOnClickListener(new View.OnClickListener() {
