@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override public void onAnimationRepeat(Animator animator) {}
                         @Override
                         public void onAnimationEnd(Animator animator) {
-                            getWindow().setStatusBarColor(Color.WHITE);
-                            setStatusBarTextColor(true);
+                            setStatusBarTextColor(false);
                             g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
                             g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
 
@@ -205,17 +204,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 animator.start();
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                setStatusBarTextColor(false);
+                setStatusBarTextColor(true);
             }
             catch (Exception e) {
             }
         }
     }
-    public void setStatusBarTextColor(final boolean dark) {
+    public void setStatusBarTextColor(final boolean light) {
         final int lFlags = getWindow().getDecorView().getSystemUiVisibility();
+        getWindow().setStatusBarColor(light? getResources().getColor(R.color.colorPrimaryDark):Color.WHITE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(dark ? (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) : (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
+            getWindow().getDecorView().setSystemUiVisibility(light ? (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) : (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
         }
     }
 }
