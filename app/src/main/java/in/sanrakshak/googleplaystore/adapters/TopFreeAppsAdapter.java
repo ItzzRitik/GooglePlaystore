@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import in.sanrakshak.googleplaystore.R;
 import in.sanrakshak.googleplaystore.models.TopFreeAppModel;
 
@@ -34,10 +35,7 @@ public class TopFreeAppsAdapter extends RecyclerView.Adapter<TopFreeAppsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        Glide.with(mContext)
-                .load(mArrayList.get(position).getAppImage())
-                .into(holder.iv_app_item);
+        Picasso.get().load(mArrayList.get(position).getAppImage()).into(holder.iv_app_item);
 
         holder.tv_app_item_number.setText(String.valueOf(position + 1));
         holder.tv_app_name.setText(mArrayList.get(position).getAppName());
