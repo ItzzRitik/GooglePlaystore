@@ -20,6 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -32,6 +35,7 @@ import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton g_sign;
     RelativeLayout g_sign_pane,g_sign_pane2;
+    ImageView icon_green;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
+        icon_green=findViewById(R.id.icon_green);
         g_sign_pane=findViewById(R.id.g_sign_pane);
         g_sign_pane2=findViewById(R.id.g_sign_pane2);
         g_sign=findViewById(R.id.g_sign);
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 int cx = g_sign_pane.getWidth()/2;
-                int cy = g_sign_pane.getHeight()-100-dptopx(60);
+                int cy = g_sign_pane.getHeight()-dptopx(130);
                 Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
                 animator.setDuration(300);
                 animator.addListener(new Animator.AnimatorListener() {
@@ -93,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                         g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
                         g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
+
+                        Animation anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
+                        anim.setDuration(550);icon_green.startAnimation(anim);
                     }
                 });
                 g_sign_pane2.setVisibility(View.VISIBLE);animator.start();

@@ -81,6 +81,7 @@
                 android:layout_width="93dp"
                 android:layout_height="93dp"
                 android:src="@drawable/icon_green"
+                android:id="@+id/icon_green"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
     </RelativeLayout>
