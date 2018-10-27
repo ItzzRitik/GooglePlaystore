@@ -2,6 +2,7 @@ package in.sanrakshak.googleplaystore;
 
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -33,6 +34,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.Task;
 
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
@@ -120,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 Animation anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
                                 anim.setDuration(550);icon_green.startAnimation(anim);
                                 new Handler().postDelayed(new Runnable() {@Override public void run() {
-
+                                    Intent signInIntent = client.getSignInIntent();
+                                    startActivityForResult(signInIntent, 0);
                                 }},500);
                             }},500);
 
@@ -172,5 +175,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
     }
 }
