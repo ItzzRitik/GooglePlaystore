@@ -4,6 +4,7 @@ package in.sanrakshak.googleplaystore;
 import android.animation.Animator;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onAnimationEnd(Animator animator) {
                         getWindow().setStatusBarColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                        }
                         g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
                         g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
                     }
