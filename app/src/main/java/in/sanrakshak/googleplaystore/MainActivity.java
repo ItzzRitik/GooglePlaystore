@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
     public String getCover(){
-        Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
+        Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/107930245062579271260?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
                 .addHeader("Content-Type", "application/json").build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
