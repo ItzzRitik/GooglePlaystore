@@ -1,8 +1,10 @@
 package in.sanrakshak.googleplaystore;
 
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +12,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.widget.RelativeLayout;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
@@ -20,7 +26,8 @@ import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    FloatingActionButton g_sign;
+    RelativeLayout g_sign_pane,g_sign_pane2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                .into(profileImageView);
 
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
+
+        g_sign_pane=findViewById(R.id.g_sign_pane);
+        g_sign=findViewById(R.id.g_sign);
+        g_sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int cx = g_sign_pane.getWidth()/2;
+                int cy = g_sign_pane.getHeight()-100-dptopx(60);
+                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(), cy);
+                animator.setDuration(300);
+                animator.start();
+            }
+        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -87,5 +107,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+    public int dptopx(float dp)
+    {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+    public int pxtodp(float px)
+    {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }
