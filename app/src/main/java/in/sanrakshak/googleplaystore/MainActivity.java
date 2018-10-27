@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         account = GoogleSignIn.getLastSignedInAccount(this);
 
         g_sign_pane=findViewById(R.id.g_sign_pane);
-        profile_name=findViewById(R.id.profile_name);
-        profile_email=findViewById(R.id.profile_email);
+        profile_name=navigationView.getHeaderView(0).findViewById(R.id.profile_name);
+        profile_email=navigationView.getHeaderView(0).findViewById(R.id.profile_email);
 
         if(account==null){
             icon_green=findViewById(R.id.icon_green);
@@ -194,9 +194,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 account = task.getResult(ApiException.class);
                 assert account != null;
-                Toast.makeText(this, account.getEmail()+" , "+account.getDisplayName(), Toast.LENGTH_SHORT).show();
-                //profile_name.setText(Objects.requireNonNull(account).getDisplayName());
-                //profile_email.setText(account.getEmail());
+                profile_name.setText(Objects.requireNonNull(account).getDisplayName());
+                profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
