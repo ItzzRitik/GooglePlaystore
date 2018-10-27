@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else{
             g_sign_pane.setVisibility(View.GONE);
+            profile_name.setText(account.getDisplayName());
+            profile_email.setText(account.getEmail());
             Glide.with(MainActivity.this)
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
