@@ -28,7 +28,6 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,16 +36,14 @@ import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -213,15 +210,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Glide.with(MainActivity.this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
-                getCover();
-//                Glide.with(this)
-//                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8")
-//                        .into(new SimpleTarget<Drawable>() {
-//                    @Override
-//                    public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
-//                        profile_cover.setBackground(resource);
-//                    }
-//                });
+                getCover(account.getId());
+
 
 
                 int cx = g_sign_pane.getWidth()/2;
@@ -256,9 +246,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getWindow().getDecorView().setSystemUiVisibility(light ? (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) : (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
         }
     }
-    public String getCover(){
+    public void getCover(String ID){
         Log.w("coverPic", "Get");
-        Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/107930245062579271260?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
+        Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/"+ID+"?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
                 .addHeader("Content-Type", "application/json").build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -275,13 +265,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("coverPic", response.toString());
                 if (response.isSuccessful())
                 {
-                    int urlIndex=coverJSON.lastIndexOf("\"url\": \"");
-                    String coverUrl=coverJSON.substring(urlIndex,coverJSON.indexOf("\"",urlIndex+10));
-                    Log.w("coverPic", coverUrl+" , "+urlIndex+" , "+coverJSON.indexOf("\"",urlIndex+10));
+                    int urlIndex=coverJSON.indexOf("\"url\": \"")+8;
+                    final String coverUrl=coverJSON.substring(urlIndex,coverJSON.indexOf("\"",urlIndex));
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Glide.with(MainActivity.this)
+                                    .load(coverUrl)
+                                    .into(new SimpleTarget<Drawable>() {
+                                        @Override
+                                        public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
+                                            profile_cover.setBackground(resource);
+                                        }
+                                    });
+                        }
+                    });
                 }
             }
         });
-        return "";
     }
 
 }
