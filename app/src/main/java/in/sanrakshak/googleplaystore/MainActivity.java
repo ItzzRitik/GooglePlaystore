@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,6 +43,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -209,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .into(profileImageView);
                 getCover();
 //                Glide.with(this)
-//                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
+//                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8")
 //                        .into(new SimpleTarget<Drawable>() {
 //                    @Override
 //                    public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
@@ -251,23 +257,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
     public String getCover(){
-        Log.e("coverPic", "Get");
-        Request request = new Request.Builder().url("https://www.googleapis.com/plus/v1/people/107930245062579271260").get()
+        Log.w("coverPic", "Get");
+        Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/107930245062579271260?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
                 .addHeader("Content-Type", "application/json").build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("coverPic", e.getMessage());
+                Log.w("coverPic", e.getMessage());
                 call.cancel();
             }
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
                 String mMessage = Objects.requireNonNull(response.body()).string();
-                Log.e("coverPic", response.toString());
-                if (response.isSuccessful()){
-                    Log.e("coverPic", mMessage);
+                Log.w("coverPic", mMessage);
+                Log.w("coverPic", response.toString());
+                if (response.isSuccessful())
+                {
+                    try {
+                        JSONArray postsArray = new JSONArray(mMessage);
+                        for (int i = 0; i < postsArray.length(); i++) {
+                            JSONArray pO = postsArray.getJSONArray(i);
+                            //Log.w("coverPic", "Object"+pO.toString());
+                        }
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        });
+                    }
+                    catch (JSONException e) {
+                        Log.w("coverPic", e.toString());
+                    }
                 }
             }
         });
