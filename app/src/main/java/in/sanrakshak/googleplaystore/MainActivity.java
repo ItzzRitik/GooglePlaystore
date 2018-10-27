@@ -2,6 +2,7 @@ package in.sanrakshak.googleplaystore;
 
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(View view) {
                     int cx = g_sign_pane.getWidth()/2;
                     int cy = g_sign_pane.getHeight()-dptopx(130);
-                    Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
+                    Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
                     animator.setDuration(300);
                     animator.addListener(new Animator.AnimatorListener() {
                         @Override public void onAnimationStart(Animator animator) {}
@@ -188,18 +189,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .into(profileImageView);
 
                 //Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
+                //g_sign_pane.animate().translationY(distance);
+
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
-                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane, cx, cy, g_sign_pane.getHeight(),0);
+                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign_pane.getHeight(),0);
                 animator.setDuration(300);
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
                     @Override public void onAnimationCancel(Animator animator) {}
                     @Override public void onAnimationRepeat(Animator animator) {}
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void onAnimationEnd(Animator animator) {
-                        g_sign_pane.setBackgroundColor(Color.WHITE);
-                        g_sign_pane.setVisibility(View.GONE);
+                        g_sign_pane2.setVisibility(View.GONE);
+                        g_sign.setVisibility(View.GONE);
+                        g_sign_pane.animate().translationY(-g_sign_pane.getHeight()).setDuration(800);
                     }
                 });
                 animator.start();
