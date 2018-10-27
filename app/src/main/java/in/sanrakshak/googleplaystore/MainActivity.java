@@ -187,12 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
 
-                Toast.makeText(this, account.getPhotoUrl()+"", Toast.LENGTH_SHORT).show();
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, account.getPhotoUrl());
-                startActivity(browserIntent);
-
-                //Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
-                //g_sign_pane.animate().translationY(distance);
+                Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
 
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
