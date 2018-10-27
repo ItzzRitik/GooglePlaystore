@@ -60,11 +60,15 @@
             android:layout_height="93dp"
             android:src="@drawable/icon_mono"
             android:layout_centerInParent="true"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/signin"
-            android:src="@drawable/google"/>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/google">
+
+        </android.support.design.widget.FloatingActionButton>
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
