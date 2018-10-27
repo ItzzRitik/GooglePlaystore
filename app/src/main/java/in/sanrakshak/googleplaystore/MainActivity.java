@@ -2,6 +2,8 @@ package in.sanrakshak.googleplaystore;
 
 
 import android.animation.Animator;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.widget.RelativeLayout;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
         g_sign_pane=findViewById(R.id.g_sign_pane);
-        g_sign_pane2=findViewById(R.id.g_sign_pane);
+        g_sign_pane2=findViewById(R.id.g_sign_pane2);
         g_sign=findViewById(R.id.g_sign);
         g_sign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int cy = g_sign_pane.getHeight()-100-dptopx(60);
                 Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(), cy);
                 animator.setDuration(300);
-                animator.start();
+                g_sign_pane2.setVisibility(View.VISIBLE);animator.start();
+                getWindow().setStatusBarColor(Color.WHITE);
+                g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
             }
         });
     }
