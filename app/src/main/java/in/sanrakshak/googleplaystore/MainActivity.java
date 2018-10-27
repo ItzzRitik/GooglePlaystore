@@ -44,6 +44,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
@@ -138,8 +140,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else{
             g_sign_pane.setVisibility(View.GONE);
-            profile_name.setText(account.getDisplayName());
-            profile_email.setText(account.getEmail());
+            Toast.makeText(this, account.getDisplayName()+" , "+account.getEmail(), Toast.LENGTH_SHORT).show();
+            //profile_name.setText(Objects.requireNonNull(account).getDisplayName());
+            //profile_email.setText(account.getEmail());
             Glide.with(MainActivity.this)
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
@@ -190,8 +193,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 account = task.getResult(ApiException.class);
-                profile_name.setText(account.getDisplayName());
-                profile_email.setText(account.getEmail());
+                assert account != null;
+                Toast.makeText(this, account.getEmail()+" , "+account.getDisplayName(), Toast.LENGTH_SHORT).show();
+                //profile_name.setText(Objects.requireNonNull(account).getDisplayName());
+                //profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
@@ -217,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setStatusBarTextColor(true);
             }
             catch (Exception e) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }
