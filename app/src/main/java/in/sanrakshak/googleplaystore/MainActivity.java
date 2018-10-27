@@ -41,6 +41,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
         else{
+            Picasso.get().load(account.getPhotoUrl()).into(profileImageView);
             g_sign_pane.setVisibility(View.GONE);
         }
     }
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 account = task.getResult(ApiException.class);
-
+                Picasso.get().load(account.getPhotoUrl()).into(profileImageView);
 
                 Toast.makeText(this, account.getPhotoUrl()+"", Toast.LENGTH_SHORT).show();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, account.getPhotoUrl());
