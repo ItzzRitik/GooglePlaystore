@@ -277,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         JSONArray postsArray = new JSONArray(mMessage);
                         for (int i = 0; i < postsArray.length(); i++) {
-                            JSONArray pO = postsArray.getJSONArray(i);
-                            //Log.w("coverPic", "Object"+pO.toString());
+                            JSONObject pO = postsArray.getJSONObject(i);
+                            Log.w("coverPic", pO.getString("coverPhotos"));
                         }
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
