@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -34,8 +35,6 @@ import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -43,12 +42,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton g_sign;
@@ -199,8 +204,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 profile_name.setText(Objects.requireNonNull(account).getDisplayName());
                 profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
-                        .load("https://people.googleapis.com/v1/people/\"+account.getId()+\"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
+                        .load(account.getPhotoUrl())
                         .into(profileImageView);
+                profile_email.setText(account.getId());
+                getCover();
 //                Glide.with(this)
 //                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
 //                        .into(new SimpleTarget<Drawable>() {
@@ -243,4 +250,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getWindow().getDecorView().setSystemUiVisibility(light ? (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) : (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
         }
     }
+    public String getCover(){
+        Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
+                .addHeader("Content-Type", "application/json").build();
+        new OkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.w("failure", e.getMessage());
+                call.cancel();
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                assert response.body() != null;
+                String mMessage = Objects.requireNonNull(response.body()).string();
+                if (response.isSuccessful()){
+                    Log.w("coverPic", mMessage);
+                }
+            }
+        });
+        return "";
+    }
+
 }
