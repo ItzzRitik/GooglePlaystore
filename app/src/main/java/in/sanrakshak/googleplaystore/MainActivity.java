@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
         }
+        getCover();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -250,20 +251,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
     public String getCover(){
-        Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/107930245062579271260?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
+        Log.e("coverPic", "Get");
+        Request request = new Request.Builder().url("https://www.googleapis.com/plus/v1/people/107930245062579271260").get()
                 .addHeader("Content-Type", "application/json").build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.w("coverPic", e.getMessage());
+                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("coverPic", e.getMessage());
                 call.cancel();
             }
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
                 String mMessage = Objects.requireNonNull(response.body()).string();
+                Log.e("coverPic", response.toString());
                 if (response.isSuccessful()){
-                    Log.w("coverPic", mMessage);
+                    Log.e("coverPic", mMessage);
                 }
             }
         });
