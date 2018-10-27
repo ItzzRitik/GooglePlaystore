@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
         g_sign_pane=findViewById(R.id.g_sign_pane);
+        g_sign_pane2=findViewById(R.id.g_sign_pane);
         g_sign=findViewById(R.id.g_sign);
         g_sign.setOnClickListener(new View.OnClickListener() {
             @Override
