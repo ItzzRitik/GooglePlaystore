@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -227,6 +228,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         g_sign_pane2.setVisibility(View.GONE);
                         g_sign.setVisibility(View.GONE);
                         g_sign_pane.animate().translationY(-g_sign_pane.getHeight()).setDuration(500);
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     }
                 });
                 animator.start();
