@@ -201,12 +201,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 account = task.getResult(ApiException.class);
                 assert account != null;
-                profile_name.setText(Objects.requireNonNull(account).getDisplayName());
+                profile_name.setText(account.getDisplayName());
                 profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
-                profile_email.setText(account.getId());
                 getCover();
 //                Glide.with(this)
 //                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
@@ -256,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.w("failure", e.getMessage());
+                Log.w("coverPic", e.getMessage());
                 call.cancel();
             }
             @Override
