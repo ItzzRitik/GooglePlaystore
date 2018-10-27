@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemIconTintList(null);
 
         profileImageView = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
-
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
 
