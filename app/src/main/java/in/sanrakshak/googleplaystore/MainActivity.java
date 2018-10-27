@@ -80,9 +80,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int cy = g_sign_pane.getHeight()-100-dptopx(60);
                 Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(), cy);
                 animator.setDuration(300);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override public void onAnimationStart(Animator animator) {}
+                    @Override public void onAnimationCancel(Animator animator) {}
+                    @Override public void onAnimationRepeat(Animator animator) {}
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        getWindow().setStatusBarColor(Color.WHITE);
+                        g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                        g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
+                    }
+                });
                 g_sign_pane2.setVisibility(View.VISIBLE);animator.start();
-                getWindow().setStatusBarColor(Color.WHITE);
-                g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
+
             }
         });
     }
