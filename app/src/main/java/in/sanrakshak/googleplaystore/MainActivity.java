@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,7 +35,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
-import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent signInIntent = client.getSignInIntent();
                             startActivityForResult(signInIntent, 0);
                         }},500);
-                    }},500);
+                    }},400);
                 }
             });
         }
@@ -179,9 +179,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 account = task.getResult(ApiException.class);
-                Glide.with(this)
-                        .load(account.getPhotoUrl())
-                        .into(profileImageView);
+
+
+                Toast.makeText(this, account.getPhotoUrl()+"", Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, account.getPhotoUrl());
+                startActivity(browserIntent);
 
                 //Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
                 //g_sign_pane.animate().translationY(distance);

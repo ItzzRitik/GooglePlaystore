@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import in.sanrakshak.googleplaystore.adapters.AppReviewsAdapter;
 import in.sanrakshak.googleplaystore.adapters.AppScreenshotsAdapter;
 import in.sanrakshak.googleplaystore.models.AppReviewItemModel;
@@ -60,9 +59,6 @@ public class AppActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         de.hdodenhof.circleimageview.CircleImageView profileImageView = findViewById(R.id.profile_image);
-//        Glide.with(this)
-//                .load(R.drawable.profile_image)
-//                .into(profileImageView);
 
         appScreenshotsRecyclerView = findViewById(R.id.rv_app_screenshots);
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
