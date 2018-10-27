@@ -113,26 +113,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());
                     animator.setDuration(500);
-                    animator.addListener(new Animator.AnimatorListener() {
-                        @Override public void onAnimationStart(Animator animator) {}
-                        @Override public void onAnimationCancel(Animator animator) {}
-                        @Override public void onAnimationRepeat(Animator animator) {}
-                        @Override
-                        public void onAnimationEnd(Animator animator) {
-                            setStatusBarTextColor(false);
-                            g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
-                            g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
-
-                            new Handler().postDelayed(new Runnable() {@Override public void run() {
-                                Animation anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
-                                anim.setDuration(550);icon_green.startAnimation(anim);
-                                Intent signInIntent = client.getSignInIntent();
-                                startActivityForResult(signInIntent, 0);
-                            }},500);
-
-                        }
-                    });
                     g_sign_pane2.setVisibility(View.VISIBLE);animator.start();
+
+                    new Handler().postDelayed(new Runnable() {@Override public void run() {
+                        setStatusBarTextColor(false);
+                        g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                        g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
+
+                        new Handler().postDelayed(new Runnable() {@Override public void run() {
+                            Animation anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
+                            anim.setDuration(550);icon_green.startAnimation(anim);
+                            Intent signInIntent = client.getSignInIntent();
+                            startActivityForResult(signInIntent, 0);
+                        }},500);
+                    }},500);
                 }
             });
         }
