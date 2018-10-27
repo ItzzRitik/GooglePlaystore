@@ -93,12 +93,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .requestEmail()
                 .build();
         client = GoogleSignIn.getClient(this, gso);
-
+        g_sign_pane=findViewById(R.id.g_sign_pane);
         if(GoogleSignIn.getLastSignedInAccount(this)==null){
             icon_green=findViewById(R.id.icon_green);
-            g_sign_pane=findViewById(R.id.g_sign_pane);
             g_sign_pane2=findViewById(R.id.g_sign_pane2);
             g_sign=findViewById(R.id.g_sign);
+            g_sign_pane.setVisibility(View.VISIBLE);
             g_sign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -200,10 +200,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override
                     public void onAnimationEnd(Animator animator) {
+                        g_sign_pane.setBackgroundColor(Color.WHITE);
                         g_sign_pane.setVisibility(View.GONE);
                     }
                 });
                 animator.start();
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    getWindow().getDecorView().setSystemUiVisibility(~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
             }
             catch (Exception e) {
             }
