@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Glide.with(MainActivity.this)
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
+            getCover(account.getId());
         }
-        getCover();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -212,8 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .into(profileImageView);
                 getCover(account.getId());
 
-
-
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
                 Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign_pane.getHeight(),0);
@@ -247,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
     public void getCover(String ID){
-        Log.w("coverPic", "Get");
         Request request = new Request.Builder().url("https://people.googleapis.com/v1/people/"+ID+"?personFields=coverPhotos&key=AIzaSyCmHrrjRt6ryGbnhM6zt4aR7FYornmTWw8").get()
                 .addHeader("Content-Type", "application/json").build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
@@ -260,9 +257,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
                 String coverJSON = Objects.requireNonNull(response.body()).string();
-                Log.w("coverPic", coverJSON);
-
-                Log.w("coverPic", response.toString());
                 if (response.isSuccessful())
                 {
                     int urlIndex=coverJSON.indexOf("\"url\": \"")+8;
