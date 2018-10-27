@@ -2,6 +2,7 @@ package in.sanrakshak.googleplaystore;
 
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -113,9 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onAnimationEnd(Animator animator) {
                             getWindow().setStatusBarColor(Color.WHITE);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                            }
+                            setStatusBarTextColor(true);
                             g_sign.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
                             g_sign.setImageDrawable(getResources().getDrawable(R.drawable.google_mono, MainActivity.this.getTheme()));
 
@@ -206,12 +206,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
                 animator.start();
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    getWindow().getDecorView().setSystemUiVisibility(~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                }
+                setStatusBarTextColor(false);
             }
             catch (Exception e) {
             }
+        }
+    }
+    public void setStatusBarTextColor(final boolean dark) {
+        final int lFlags = getWindow().getDecorView().getSystemUiVisibility();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(dark ? (lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) : (lFlags | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
         }
     }
 }
