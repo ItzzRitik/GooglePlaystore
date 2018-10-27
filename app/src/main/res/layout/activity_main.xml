@@ -56,8 +56,8 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
             android:src="@drawable/icon_mono"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
