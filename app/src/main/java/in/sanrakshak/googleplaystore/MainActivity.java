@@ -32,6 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton g_sign;
     RelativeLayout g_sign_pane,g_sign_pane2;
     ImageView icon_green;
+    TextView profile_name,profile_email;
     CircleImageView profileImageView;
     GoogleSignInOptions gso;
     GoogleSignInClient client;
@@ -101,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         account = GoogleSignIn.getLastSignedInAccount(this);
 
         g_sign_pane=findViewById(R.id.g_sign_pane);
+        profile_name=findViewById(R.id.profile_name);
+        profile_email=findViewById(R.id.profile_email);
+
         if(account==null){
             icon_green=findViewById(R.id.icon_green);
             g_sign_pane2=findViewById(R.id.g_sign_pane2);
