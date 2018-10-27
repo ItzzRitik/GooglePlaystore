@@ -1,7 +1,7 @@
 <resources>
 
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
-        <item name="android:windowBackground">@drawable/splash</item>
+
     </style>
 
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">

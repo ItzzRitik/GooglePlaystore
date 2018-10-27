@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView profileImageView;
     GoogleSignInOptions gso;
     GoogleSignInClient client;
+    GoogleSignInAccount account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +96,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .requestEmail()
                 .build();
         client = GoogleSignIn.getClient(this, gso);
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
         g_sign_pane=findViewById(R.id.g_sign_pane);
-        if(GoogleSignIn.getLastSignedInAccount(this)==null){
+        if(account==null){
             icon_green=findViewById(R.id.icon_green);
             g_sign_pane2=findViewById(R.id.g_sign_pane2);
             g_sign=findViewById(R.id.g_sign);
@@ -179,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == 0) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                account = task.getResult(ApiException.class);
                 Glide.with(this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
