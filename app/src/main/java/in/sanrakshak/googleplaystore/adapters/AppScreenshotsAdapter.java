@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import in.sanrakshak.googleplaystore.R;
 
 import java.util.ArrayList;
@@ -33,9 +34,7 @@ public class AppScreenshotsAdapter extends RecyclerView.Adapter<AppScreenshotsAd
 
     @Override
     public void onBindViewHolder(@NonNull AppScreenshotsAdapter.AppViewHolder holder, int position) {
-        Glide.with(mContext)
-                .load(getImage(screenShotsList.get(position)))
-                .into(holder.screenshotImage);
+        Picasso.get().load(getImage(screenShotsList.get(position))).into(holder.screenshotImage);
     }
 
     private int getImage(String imageName) {

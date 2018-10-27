@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import in.sanrakshak.googleplaystore.R;
 import in.sanrakshak.googleplaystore.models.AppReviewItemModel;
 
@@ -39,9 +40,7 @@ public class AppReviewsAdapter extends RecyclerView.Adapter<AppReviewsAdapter.Ap
         holder.userReview.setText(appReviewsList.get(position).getUserReview());
         holder.userReviewDate.setText(appReviewsList.get(position).getUserReviewDate());
         holder.userReviewRating.setRating(appReviewsList.get(position).getUserReviewRatings());
-        Glide.with(mContext)
-                .load(appReviewsList.get(position).getUserPicture())
-                .into(holder.userImage);
+        Picasso.get().load(appReviewsList.get(position).getUserPicture()).into(holder.userImage);
     }
 
     @Override
