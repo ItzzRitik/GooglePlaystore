@@ -51,7 +51,7 @@
             android:layout_marginEnd="1dp"
             android:gravity="center_vertical"
             android:text="@string/sample_rating"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/iv_app_rating"
