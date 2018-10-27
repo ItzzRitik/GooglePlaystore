@@ -38,6 +38,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton g_sign;
     RelativeLayout g_sign_pane,g_sign_pane2;
     ImageView icon_green;
+    CircleImageView profileImageView;
     GoogleSignInOptions gso;
     GoogleSignInClient client;
     @Override
@@ -80,10 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
 
-        de.hdodenhof.circleimageview.CircleImageView profileImageView = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
-//        Glide.with(this)
-//                .load(R.drawable.profile_image)
-//                .into(profileImageView);
+        profileImageView = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
 
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
@@ -186,7 +185,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Toast.makeText(this, account.getEmail(), Toast.LENGTH_SHORT).show();
+                Glide.with(this)
+                        .load(account.getPhotoUrl())
+                        .into(profileImageView);
+
+                Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
+                int cx = g_sign_pane.getWidth()/2;
+                int cy = g_sign_pane.getHeight()-dptopx(130);
+                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane, cx, cy, g_sign_pane.getHeight(),0);
+                animator.setDuration(300);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override public void onAnimationStart(Animator animator) {}
+                    @Override public void onAnimationCancel(Animator animator) {}
+                    @Override public void onAnimationRepeat(Animator animator) {}
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        g_sign_pane.setVisibility(View.GONE);
+                    }
+                });
+                animator.start();
             }
             catch (Exception e) {
             }
