@@ -269,26 +269,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
-                String mMessage = Objects.requireNonNull(response.body()).string();
-                Log.w("coverPic", mMessage);
+                String coverJSON = Objects.requireNonNull(response.body()).string();
+                Log.w("coverPic", coverJSON);
+
                 Log.w("coverPic", response.toString());
                 if (response.isSuccessful())
                 {
-                    try {
-                        JSONArray postsArray = new JSONArray(mMessage);
-                        for (int i = 0; i < postsArray.length(); i++) {
-                            JSONObject pO = postsArray.getJSONObject(i);
-                            Log.w("coverPic", pO.getString("coverPhotos"));
-                        }
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                            }
-                        });
-                    }
-                    catch (JSONException e) {
-                        Log.w("coverPic", e.toString());
-                    }
+                    int urlIndex=coverJSON.indexOf("\"url\": \"");
+                    String coverUrl=coverJSON.substring(urlIndex,coverJSON.indexOf("\"",urlIndex));
+                    Log.w("coverPic", coverUrl+" , "+urlIndex+" , "+coverJSON.indexOf("\"",urlIndex));
                 }
             }
         });
