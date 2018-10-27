@@ -51,7 +51,7 @@
             android:layout_marginEnd="1dp"
             android:gravity="center_vertical"
             android:text="@string/sample_rating"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/iv_app_rating"
@@ -70,7 +70,7 @@
             android:layout_alignParentEnd="true"
             android:text="@string/free"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </LinearLayout>
