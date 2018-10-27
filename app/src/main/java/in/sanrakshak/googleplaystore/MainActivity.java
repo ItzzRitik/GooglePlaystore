@@ -140,9 +140,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else{
             g_sign_pane.setVisibility(View.GONE);
-            Toast.makeText(this, account.getDisplayName()+" , "+account.getEmail(), Toast.LENGTH_SHORT).show();
-            //profile_name.setText(Objects.requireNonNull(account).getDisplayName());
-            //profile_email.setText(account.getEmail());
+
+            assert account != null;
+            profile_name.setText(Objects.requireNonNull(account).getDisplayName());
+            profile_email.setText(account.getEmail());
             Glide.with(MainActivity.this)
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
