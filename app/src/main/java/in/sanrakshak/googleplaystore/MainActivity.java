@@ -128,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     });
                     g_sign_pane2.setVisibility(View.VISIBLE);animator.start();
-
-
                 }
             });
         }
