@@ -60,6 +60,7 @@
             android:layout_height="93dp"
             android:src="@drawable/icon_mono"
             android:layout_centerInParent="true"/>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
