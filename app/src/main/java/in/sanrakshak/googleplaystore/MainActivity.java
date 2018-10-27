@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 int cx = g_sign_pane.getWidth()/2;
-                int cy = g_sign_pane.getHeight();
-                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(), cy);
+                int cy = g_sign_pane.getHeight()-100-dptopx(60);
+                Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
                 animator.setDuration(300);
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
