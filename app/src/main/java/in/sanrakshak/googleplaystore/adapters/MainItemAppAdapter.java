@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
+import com.bumptech.glide.Glide;
 import in.sanrakshak.googleplaystore.R;
 import in.sanrakshak.googleplaystore.AppActivity;
 import in.sanrakshak.googleplaystore.models.MainItemAppModel;
@@ -39,7 +38,9 @@ public class MainItemAppAdapter extends RecyclerView.Adapter<MainItemAppAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Picasso.get().load(mArrayList.get(position).getAppImage()).into(holder.iv_app_image);
+        Glide.with(mcontext)
+                .load(mArrayList.get(position).getAppImage())
+                .into(holder.iv_app_image);
 
         holder.tv_app_name.setText(mArrayList.get(position).getAppName());
         holder.tv_app_rating.setText(mArrayList.get(position).getAppRating());

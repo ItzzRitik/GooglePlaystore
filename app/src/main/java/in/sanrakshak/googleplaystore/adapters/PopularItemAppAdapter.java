@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
+import com.bumptech.glide.Glide;
 import in.sanrakshak.googleplaystore.R;
 import in.sanrakshak.googleplaystore.models.PopularItemAppModel;
 
@@ -36,7 +35,9 @@ public class PopularItemAppAdapter extends RecyclerView.Adapter<PopularItemAppAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Picasso.get().load(mArrayList.get(position).getItemImage()).into(holder.iv_card_graphics);
+        Glide.with(mcontext)
+                .load(mArrayList.get(position).getItemImage())
+                .into(holder.iv_card_graphics);
 
         holder.tv_card_header.setText(mArrayList.get(position).getItemHeader());
         holder.tv_card_sub_header.setText(mArrayList.get(position).getItemSubHeader());
