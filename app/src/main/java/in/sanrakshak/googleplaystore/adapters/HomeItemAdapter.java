@@ -96,14 +96,14 @@ public class HomeItemAdapter extends RecyclerView.Adapter {
         ArrayList<MainItemAppModel> mArrayList = new ArrayList<>();
 
         if (context != null) {
-            mArrayList.add(new MainItemAppModel("Udacity", "4.3", "FREE", R.drawable.ic_udacity));
+            mArrayList.add(new MainItemAppModel("Udacity - Lifelong Learning", "4.3", "FREE", R.drawable.ic_udacity));
             mArrayList.add(new MainItemAppModel("Facebook", "4.1", "FREE", R.drawable.logo_facebook));
             mArrayList.add(new MainItemAppModel("Slack", "4.4", "FREE", R.drawable.logo_slack));
             mArrayList.add(new MainItemAppModel("Gmail", "4.3", "FREE", R.drawable.logo_gmail));
             mArrayList.add(new MainItemAppModel("LinkedIn", "4.2", "FREE", R.drawable.logo_linkedin));
-            mArrayList.add(new MainItemAppModel("Whatsapp", "4.4", "FREE", R.drawable.logo_whatsapp));
-            mArrayList.add(new MainItemAppModel("To do", "4.0", "FREE", R.drawable.logo_to_do));
-            mArrayList.add(new MainItemAppModel("Code Monk", "4.3", "FREE", R.drawable.logo_code_monk));
+            mArrayList.add(new MainItemAppModel("WhatsApp Messenger", "4.4", "FREE", R.drawable.logo_whatsapp));
+            mArrayList.add(new MainItemAppModel("Microsoft To-Do: List, Task & Reminder", "4.1", "FREE", R.drawable.logo_to_do));
+            mArrayList.add(new MainItemAppModel("Twitter", "4.3", "FREE", R.drawable.logo_twitter));
         }
 
         return mArrayList;
