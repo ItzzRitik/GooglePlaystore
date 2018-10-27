@@ -121,10 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             new Handler().postDelayed(new Runnable() {@Override public void run() {
                                 Animation anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
                                 anim.setDuration(550);icon_green.startAnimation(anim);
-                                new Handler().postDelayed(new Runnable() {@Override public void run() {
-                                    Intent signInIntent = client.getSignInIntent();
-                                    startActivityForResult(signInIntent, 0);
-                                }},500);
+                                Intent signInIntent = client.getSignInIntent();
+                                startActivityForResult(signInIntent, 0);
                             }},500);
 
                         }
@@ -188,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
 
-                Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
                 Animator animator =ViewAnimationUtils.createCircularReveal(g_sign_pane, cx, cy, g_sign_pane.getHeight(),0);
