@@ -275,9 +275,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("coverPic", response.toString());
                 if (response.isSuccessful())
                 {
-                    int urlIndex=coverJSON.indexOf("\"url\": \"");
-                    String coverUrl=coverJSON.substring(urlIndex,coverJSON.indexOf("\"",urlIndex));
-                    Log.w("coverPic", coverUrl+" , "+urlIndex+" , "+coverJSON.indexOf("\"",urlIndex));
+                    int urlIndex=coverJSON.lastIndexOf("\"url\": \"");
+                    String coverUrl=coverJSON.substring(urlIndex,coverJSON.indexOf("\"",urlIndex+10));
+                    Log.w("coverPic", coverUrl+" , "+urlIndex+" , "+coverJSON.indexOf("\"",urlIndex+10));
                 }
             }
         });
