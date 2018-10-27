@@ -3,16 +3,14 @@ package in.sanrakshak.googleplaystore;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -25,18 +23,19 @@ import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RelativeLayout g_sign_pane,g_sign_pane2;
     ImageView icon_green;
     TextView profile_name,profile_email;
+    LinearLayout profile_cover;
     CircleImageView profileImageView;
     GoogleSignInOptions gso;
     GoogleSignInClient client;
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         g_sign_pane=findViewById(R.id.g_sign_pane);
         profile_name=navigationView.getHeaderView(0).findViewById(R.id.profile_name);
         profile_email=navigationView.getHeaderView(0).findViewById(R.id.profile_email);
+        profile_cover=navigationView.getHeaderView(0).findViewById(R.id.profile_cover);
 
         if(account==null){
             icon_green=findViewById(R.id.icon_green);
@@ -198,8 +199,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 profile_name.setText(Objects.requireNonNull(account).getDisplayName());
                 profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
-                        .load(account.getPhotoUrl())
+                        .load("https://people.googleapis.com/v1/people/\"+account.getId()+\"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
                         .into(profileImageView);
+//                Glide.with(this)
+//                        .load("https://people.googleapis.com/v1/people/"+account.getId()+"?personFields=coverPhotos&key=AIzaSyA47YtdQbYXTi8yfNZH6frIv5TGbo4bEd4")
+//                        .into(new SimpleTarget<Drawable>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
+//                        profile_cover.setBackground(resource);
+//                    }
+//                });
+
 
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
