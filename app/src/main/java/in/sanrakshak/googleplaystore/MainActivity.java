@@ -190,11 +190,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 account = task.getResult(ApiException.class);
+                profile_name.setText(account.getDisplayName());
+                profile_email.setText(account.getEmail());
                 Glide.with(MainActivity.this)
                         .load(account.getPhotoUrl())
                         .into(profileImageView);
-
-                Toast.makeText(this, account.getEmail()+"\n"+account.getDisplayName(), Toast.LENGTH_SHORT).show();
 
                 int cx = g_sign_pane.getWidth()/2;
                 int cy = g_sign_pane.getHeight()-dptopx(130);
