@@ -10,7 +10,7 @@ public class VizActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         finish();
-        overridePendingTransition(R.anim.splash_out, R.anim.splash_in);
+        overridePendingTransition(R.anim.exit_in, R.anim.exit_out);
         return true;
     }
     @Override
