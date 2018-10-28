@@ -2,10 +2,14 @@ package in.sanrakshak.googleplaystore;
 
 
 import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,28 +49,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import de.siegmar.fastcsv.reader.CsvContainer;
-import de.siegmar.fastcsv.reader.CsvReader;
-import de.siegmar.fastcsv.reader.CsvRow;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
-import in.sanrakshak.googleplaystore.models.AppDataModel;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -75,8 +64,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    FloatingActionButton g_sign;
-    RelativeLayout g_sign_pane,g_sign_pane2;
+    FloatingActionButton g_sign,viz;
+    RelativeLayout g_sign_pane,g_sign_pane2,viz_pane,viz_main_pane;
     ImageView icon_green;
     TextView profile_name,profile_email;
     LinearLayout profile_cover;
@@ -84,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GoogleSignInOptions gso;
     GoogleSignInClient client;
     GoogleSignInAccount account;
+    double fabX,fabY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +111,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSearchView.attachNavigationDrawerToMenuButton(drawer);
 
 
+        viz_pane=findViewById(R.id.viz_pane);
+        viz=findViewById(R.id.viz);
+        viz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float CurrentX = viz.getX();
+                float CurrentY = viz.getY();
+                fabX=CurrentX;
+                fabY=CurrentY;
+                float FinalX = (viz_pane.getWidth()/2)-(viz.getWidth()/2);
+                float FinalY = (viz_pane.getHeight()/2)-(viz.getHeight()/2);
+                Path path = new Path();
+                path.moveTo(CurrentX, CurrentY);
+                path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
+                Animator startAnim = ObjectAnimator.ofFloat(viz, View.X, View.Y, path);
+                startAnim.setDuration(300);
+                startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                startAnim.addListener(new Animator.AnimatorListener() {
+                    @Override public void onAnimationStart(Animator animator) {}
+                    @Override public void onAnimationCancel(Animator animator) {}
+                    @Override public void onAnimationRepeat(Animator animator) {}
+                    @Override public void onAnimationEnd(Animator animator) {
+                        int cx = viz_pane.getWidth()/2;
+                        int cy = viz_pane.getHeight()/2;
+                        int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
+                        animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy, viz.getWidth(), finalRadius);
+                        animator.setDuration(300);
+                        animator.start();
+                    }
+                });
+                startAnim.start();
+            }
+        });
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
