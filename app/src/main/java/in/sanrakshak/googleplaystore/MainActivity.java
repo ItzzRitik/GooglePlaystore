@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override public void onAnimationCancel(Animator animator) {}
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
+                        viz_main_pane.setVisibility(View.VISIBLE);
                         int cx = viz_pane.getWidth()/2;
                         int cy = viz_pane.getHeight()/2;
                         int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());

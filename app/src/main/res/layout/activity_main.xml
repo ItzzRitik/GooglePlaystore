@@ -96,6 +96,7 @@
                 android:focusable="true"
                 android:visibility="gone"
                 android:background="@color/colorPrimaryDark"
+                android:elevation="10dp"
                 android:id="@+id/viz_main_pane">
 
             </RelativeLayout>
