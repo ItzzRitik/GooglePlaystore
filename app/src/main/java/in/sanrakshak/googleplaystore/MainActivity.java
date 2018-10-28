@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         viz_pane=findViewById(R.id.viz_pane);
+        viz_main_pane=findViewById(R.id.viz_main_pane);
         viz=findViewById(R.id.viz);
         viz.setOnClickListener(new View.OnClickListener() {
             @Override
