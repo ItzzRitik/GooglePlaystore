@@ -295,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("coverPic", csvUser.getAppName());
                 Log.w("coverPic", csvUser.getAppCategory());
                 Log.w("coverPic", csvUser.getAppPrice());
+                break;
             }
         }
     }
