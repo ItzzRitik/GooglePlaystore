@@ -15,6 +15,7 @@ public class AppDataModel {
     private String appLastUpdated;
     private String appCurrentVer;
     private String appAndroidVer;
+
     public AppDataModel(String appName, String appCategory, String appSize, String appRating, String appReviews,
                         String appInstalls, String appType, String appPrice, String appContentRating,String appGenres,
                         String appLastUpdated,String appCurrentVer,String appAndroidVer) {
