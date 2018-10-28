@@ -87,13 +87,24 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viz_pane">
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                android:background="#ffffff"
+                android:id="@+id/viz_pane">
+
+            </RelativeLayout>
             <android.support.design.widget.FloatingActionButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:focusable="true"
+                android:clickable="true"
                 android:layout_margin="25dp"
                 android:src="@drawable/chart"
                 android:backgroundTint="@color/colorPrimary"
