@@ -288,8 +288,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void parseCSV()
     {
-
-
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
             String [] nextLine;
