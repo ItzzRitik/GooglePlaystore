@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int cy = viz_pane.getHeight()/2;
                 int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
                 Animator animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy,finalRadius, viz.getWidth());
-                animator.setDuration(300);
+                animator.setDuration(350);
+                animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
                     @Override public void onAnimationCancel(Animator animator) {}
