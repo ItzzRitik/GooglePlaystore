@@ -49,30 +49,26 @@ public class VizActivity extends AppCompatActivity {
     }
     private BarDataSet getDataSet() {
 
-        ArrayList<BarEntry> entries = new ArrayList();
-        entries.add(new BarEntry(4f, 0));
-        entries.add(new BarEntry(8f, 1));
-        entries.add(new BarEntry(6f, 2));
-        entries.add(new BarEntry(12f, 3));
-        entries.add(new BarEntry(18f, 4));
-        entries.add(new BarEntry(9f, 5));
-
-        BarDataSet dataset = new BarDataSet(entries,"hi");
-        return dataset;
-    }
-    public void parseCSV()
-    {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        final ArrayList<String> yLabel = new ArrayList<>();
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
             String [] nextLine;
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 lineNumber++;
                 Log.w("coverPic", nextLine[4]+" , "+lineNumber);
+                entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                yLabel.add(nextLine[1]);
             }
         }
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
+
+        return new BarDataSet(entries,"Ratings");
+    }
+    public void parseCSV()
+    {
+
     }
 }
