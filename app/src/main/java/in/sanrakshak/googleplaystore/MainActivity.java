@@ -49,7 +49,9 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -59,6 +61,9 @@ import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import de.siegmar.fastcsv.reader.CsvContainer;
+import de.siegmar.fastcsv.reader.CsvReader;
+import de.siegmar.fastcsv.reader.CsvRow;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
 import in.sanrakshak.googleplaystore.models.AppDataModel;
@@ -137,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             g_sign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    parseCSV();/*
                     int cx = g_sign_pane.getWidth()/2;
                     int cy = g_sign.getBottom()-(g_sign.getHeight()/2);
                     Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
@@ -155,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent signInIntent = client.getSignInIntent();
                             startActivityForResult(signInIntent, 0);
                         }},500);
-                    }},400);
+                    }},400);*/
                 }
             });
         }
@@ -169,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        parseCSV();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -283,22 +288,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void parseCSV()
     {
-        BufferedReader fileReader = null;
-        CsvToBean<AppDataModel> csvToBean = null;
+
 
         try {
-            fileReader = new BufferedReader(new InputStreamReader(getAssets().open("appdata.csv")));
-            csvToBean = new CsvToBeanBuilder<AppDataModel>(fileReader)
-                    .withType(AppDataModel.class)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
-
-            List<AppDataModel> customers = csvToBean.parse();
-
-            for (AppDataModel customer : customers) {
-                Log.w("coverPic", customer.getAppName());
-                Log.w("coverPic", customer.getAppCategory());
-                Log.w("coverPic", customer.getAppPrice());
+            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
+            String [] nextLine;
+            int lineNumber = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                lineNumber++;
+                Log.w("coverPic", nextLine[4]+" , "+lineNumber);
             }
         }
         catch (Exception e) {
