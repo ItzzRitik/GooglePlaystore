@@ -50,6 +50,8 @@ public class VizActivity extends AppCompatActivity {
         BarData data = new BarData(getDataSet());
         hbc.setData(data);
         hbc.animateXY(2000, 2000);
+        hbc.setVisibleXRangeMaximum(100);
+        hbc.setVisibleYRangeMaximum(6, YAxis.AxisDependency.LEFT);
         hbc.invalidate();
 
     }
