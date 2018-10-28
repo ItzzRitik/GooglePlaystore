@@ -55,6 +55,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -286,17 +287,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void parseCSV() throws IOException
     {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("small.csv")));)
-        {
-            CsvToBean<AppDataModel> csvToBean = new CsvToBeanBuilder<AppDataModel>(reader).withType(AppDataModel.class)
-                    .withIgnoreLeadingWhiteSpace(true).build();
+        BufferedReader fileReader = null;
+        CsvToBean<AppDataModel> csvToBean = null;
 
-            for (AppDataModel csvUser : csvToBean) {
-                Log.w("coverPic", csvUser.getAppName());
-                Log.w("coverPic", csvUser.getAppCategory());
-                Log.w("coverPic", csvUser.getAppPrice());
-                break;
+        try {
+            fileReader = new BufferedReader(new InputStreamReader(getAssets().open("small.csv")));
+            csvToBean = new CsvToBeanBuilder<AppDataModel>(fileReader)
+                    .withType(AppDataModel.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            List<AppDataModel> customers = csvToBean.parse();
+
+            for (AppDataModel customer : customers) {
+                Log.w("coverPic", customer.getAppName());
+                Log.w("coverPic", customer.getAppCategory());
+                Log.w("coverPic", customer.getAppPrice());
             }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
