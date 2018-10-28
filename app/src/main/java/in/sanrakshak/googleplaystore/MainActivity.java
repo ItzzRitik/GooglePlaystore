@@ -156,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .load(account.getPhotoUrl())
                     .into(profileImageView);
             getCover(account.getId());
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
     private void setupViewPager(ViewPager viewPager) {
