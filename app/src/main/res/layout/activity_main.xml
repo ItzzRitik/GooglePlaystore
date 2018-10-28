@@ -53,42 +53,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/g_sign_pane"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone"
-            android:elevation="15dp"
-            android:background="@color/colorPrimaryDark">
-            <ImageView
-                android:layout_width="93dp"
-                android:layout_height="93dp"
-                android:src="@drawable/icon_mono"
-                android:layout_centerInParent="true"/>
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="100dp"
-                android:src="@drawable/google"
-                android:id="@+id/g_sign"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:id="@+id/g_sign_pane2"
-                android:visibility="gone">
-                <ImageView
-                    android:layout_width="93dp"
-                    android:layout_height="93dp"
-                    android:src="@drawable/icon_green"
-                    android:id="@+id/icon_green"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/viz_pane">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -118,6 +82,41 @@
                 android:src="@drawable/chart"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:id="@+id/viz"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/g_sign_pane"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryDark">
+            <ImageView
+                android:layout_width="93dp"
+                android:layout_height="93dp"
+                android:src="@drawable/icon_mono"
+                android:layout_centerInParent="true"/>
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="100dp"
+                android:src="@drawable/google"
+                android:id="@+id/g_sign"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:id="@+id/g_sign_pane2"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="93dp"
+                    android:layout_height="93dp"
+                    android:src="@drawable/icon_green"
+                    android:id="@+id/icon_green"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 
