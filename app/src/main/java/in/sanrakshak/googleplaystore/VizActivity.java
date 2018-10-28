@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static java.lang.Float.NaN;
 
 public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
@@ -67,10 +66,12 @@ public class VizActivity extends AppCompatActivity {
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
-                Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
-                if(Float.parseFloat(nextLine[2])==NaN){continue;}
-                entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                xLabel.add(nextLine[1]);
+                //Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
+                if(!nextLine[2].equals("NaN")){
+                    entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    xLabel.add(nextLine[1]);
+                }
+
             }
         }
         catch (Exception e) {
