@@ -20,7 +20,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,8 +44,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.opencsv.CSVReader;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -269,6 +273,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+    }
+    public void parseCSV() throws IOException {
+        String fileName = "src/main/assets/appdata.csv";
+
+        try (FileInputStream fis = new FileInputStream(fileName);
+             InputStreamReader isr = new InputStreamReader(fis,
+                     StandardCharsets.UTF_8);
+             CSVReader reader = new CSVReader(isr)) {
+            String[] nextLine;
+
+            while ((nextLine = reader.readNext()) != null) {
+
+                for (String e : nextLine) {
+                    System.out.format("%s ", e);
+                }
+            }
+        }
     }
 
 }
