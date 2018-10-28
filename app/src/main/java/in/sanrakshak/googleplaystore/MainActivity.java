@@ -48,6 +48,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             parseCSV();
         } catch (IOException e) {
+            Log.w("coverPic", e.toString());
         }
     }
     private void setupViewPager(ViewPager viewPager) {
@@ -283,12 +285,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
     public void parseCSV() throws IOException {
-        String fileName = "src/main/assets/appdata.csv";
 
-        try (FileInputStream fis = new FileInputStream(fileName);
-             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8))
+        try ( BufferedReader reader = new BufferedReader(
+                new InputStreamReader(getAssets().open("filename.txt")));)
         {
-            CsvToBean<AppDataModel> csvToBean = new CsvToBeanBuilder<AppDataModel>(isr).withType(AppDataModel.class)
+            CsvToBean<AppDataModel> csvToBean = new CsvToBeanBuilder<AppDataModel>(reader).withType(AppDataModel.class)
                     .withIgnoreLeadingWhiteSpace(true).build();
 
             for (AppDataModel csvUser : csvToBean) {
