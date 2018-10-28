@@ -82,29 +82,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         if(isViz){
-            int cx = viz_pane.getWidth()/2;
-            int cy = viz_pane.getHeight()/2;
-            int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
-            Animator animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy,finalRadius, viz.getWidth());
-            animator.setDuration(300);
-            animator.addListener(new Animator.AnimatorListener() {
-                @Override public void onAnimationStart(Animator animator) {}
-                @Override public void onAnimationCancel(Animator animator) {}
-                @Override public void onAnimationRepeat(Animator animator) {}
-                @Override public void onAnimationEnd(Animator animator) {
-                    viz_main_pane.setVisibility(View.GONE);
-                    float CurrentX = viz.getX();
-                    float CurrentY = viz.getY();
-                    Path path = new Path();
-                    path.moveTo(CurrentX, CurrentY);
-                    path.quadTo(CurrentX*3/7, (float)(CurrentY+fabY)*4/6, (float)fabX,(float) fabY);
-                    Animator startAnim = ObjectAnimator.ofFloat(viz, View.X, View.Y, path);
-                    startAnim.setDuration(300);
-                    startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-                    startAnim.start();
-                }
-            });
-            animator.start();
+            new Handler().postDelayed(new Runnable() {@Override public void run() {
+                int cx = viz_pane.getWidth()/2;
+                int cy = viz_pane.getHeight()/2;
+                int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
+                Animator animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy,finalRadius, viz.getWidth());
+                animator.setDuration(300);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override public void onAnimationStart(Animator animator) {}
+                    @Override public void onAnimationCancel(Animator animator) {}
+                    @Override public void onAnimationRepeat(Animator animator) {}
+                    @Override public void onAnimationEnd(Animator animator) {
+                        viz_main_pane.setVisibility(View.GONE);
+                        float CurrentX = viz.getX();
+                        float CurrentY = viz.getY();
+                        Path path = new Path();
+                        path.moveTo(CurrentX, CurrentY);
+                        path.quadTo(CurrentX*3/7, (float)(CurrentY+fabY)*4/6, (float)fabX,(float) fabY);
+                        Animator startAnim = ObjectAnimator.ofFloat(viz, View.X, View.Y, path);
+                        startAnim.setDuration(300);
+                        startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                        startAnim.start();
+                    }
+                });
+                animator.start();
+            }},800);
         }
     }
     @Override
