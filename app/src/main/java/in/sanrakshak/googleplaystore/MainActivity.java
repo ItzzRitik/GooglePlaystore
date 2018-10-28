@@ -27,8 +27,10 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -87,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int cy = viz_pane.getHeight()/2;
                 int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
                 Animator animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy,finalRadius, viz.getWidth());
-                animator.setDuration(350);
-                animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                animator.setDuration(300);
+                animator.setInterpolator(new DecelerateInterpolator());
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
                     @Override public void onAnimationCancel(Animator animator) {}
@@ -174,8 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int cy = viz_pane.getHeight()/2;
                         int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
                         animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy, viz.getWidth(), finalRadius);
-                        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                        animator.setDuration(350);
+                        animator.setInterpolator(new AccelerateInterpolator());
+                        animator.setDuration(300);
                         animator.addListener(new Animator.AnimatorListener() {
                             @Override public void onAnimationStart(Animator animator) {}
                             @Override public void onAnimationCancel(Animator animator) {}
