@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void parseCSV() throws IOException
     {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("appdata.csv")));)
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("small.csv")));)
         {
             CsvToBean<AppDataModel> csvToBean = new CsvToBeanBuilder<AppDataModel>(reader).withType(AppDataModel.class)
                     .withIgnoreLeadingWhiteSpace(true).build();
