@@ -5,9 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -18,6 +22,7 @@ import java.util.Objects;
 public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
     CSVReader reader;
+    ArrayList<String> xLabel;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -46,11 +51,12 @@ public class VizActivity extends AppCompatActivity {
         hbc.setData(data);
         hbc.animateXY(2000, 2000);
         hbc.invalidate();
+
     }
     private BarDataSet getDataSet() {
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        final ArrayList<String> yLabel = new ArrayList<>();
+        xLabel = new ArrayList<>();
         try {
             String [] nextLine;
             int lineNumber = 0;
@@ -58,17 +64,19 @@ public class VizActivity extends AppCompatActivity {
                 lineNumber++;
                 Log.w("coverPic", nextLine[4]+" , "+lineNumber);
                 entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                yLabel.add(nextLine[1]);
+                xLabel.add(nextLine[1]);
             }
         }
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
-
+        XAxis xAxis = hbc.getXAxis();
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return xLabel.get((int) value);
+            }
+        });
         return new BarDataSet(entries,"Ratings");
-    }
-    public void parseCSV()
-    {
-
     }
 }
