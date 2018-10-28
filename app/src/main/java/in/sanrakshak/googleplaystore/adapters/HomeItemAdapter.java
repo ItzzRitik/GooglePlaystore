@@ -16,6 +16,7 @@ import in.sanrakshak.googleplaystore.models.MainItemAppModel;
 import in.sanrakshak.googleplaystore.models.PopularItemAppModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeItemAdapter extends RecyclerView.Adapter {
 
@@ -105,7 +106,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter {
             mArrayList.add(new MainItemAppModel("Microsoft To-Do: List, Task & Reminder", "4.1", "FREE", R.drawable.logo_to_do));
             mArrayList.add(new MainItemAppModel("Twitter", "4.3", "FREE", R.drawable.logo_twitter));
         }
-
+        Collections.shuffle(mArrayList);
         return mArrayList;
     }
 
