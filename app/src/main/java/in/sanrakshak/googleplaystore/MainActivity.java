@@ -42,6 +42,7 @@ import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.gc.android.market.api.Main;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -141,6 +142,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy, viz.getWidth(), finalRadius);
                         animator.setInterpolator(new AccelerateDecelerateInterpolator());
                         animator.setDuration(350);
+                        animator.addListener(new Animator.AnimatorListener() {
+                            @Override public void onAnimationStart(Animator animator) {}
+                            @Override public void onAnimationCancel(Animator animator) {}
+                            @Override public void onAnimationRepeat(Animator animator) {}
+                            @Override public void onAnimationEnd(Animator animator) {
+                                Intent intent=new Intent(MainActivity.this,VizActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
+                            }
+                        });
                         animator.start();
                     }
                 });
