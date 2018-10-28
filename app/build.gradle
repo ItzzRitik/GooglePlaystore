@@ -31,7 +31,7 @@ dependencies {
     implementation 'de.siegmar:fastcsv:1.0.3'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
-    implementation ('com.github.arimorty:floatingsearchview:2.1.1') {
+    implementation('com.github.arimorty:floatingsearchview:2.1.1') {
         exclude group: 'com.android.support'
         exclude module: 'appcompat-v7'
         exclude module: 'support-v4'

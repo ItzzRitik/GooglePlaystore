@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 path.moveTo(CurrentX, CurrentY);
                 path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
                 Animator startAnim = ObjectAnimator.ofFloat(viz, View.X, View.Y, path);
-                startAnim.setDuration(500);
+                startAnim.setDuration(350);
                 startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
                 startAnim.addListener(new Animator.AnimatorListener() {
                     @Override public void onAnimationStart(Animator animator) {}
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
                         animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy, viz.getWidth(), finalRadius);
                         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                        animator.setDuration(500);
+                        animator.setDuration(350);
                         animator.start();
                     }
                 });
