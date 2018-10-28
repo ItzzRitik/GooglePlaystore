@@ -169,11 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        try {
-            parseCSV();
-        } catch (IOException e) {
-            Log.w("coverPic", e.toString());
-        }
+        parseCSV();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -285,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-    public void parseCSV() throws IOException
+    public void parseCSV()
     {
         BufferedReader fileReader = null;
         CsvToBean<AppDataModel> csvToBean = null;
@@ -306,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Log.w("coverPic", e.toString());
         }
     }
 }
