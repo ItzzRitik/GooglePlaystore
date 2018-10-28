@@ -61,8 +61,8 @@ public class VizActivity extends AppCompatActivity {
             String [] nextLine;
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
-                lineNumber++;
-                Log.w("coverPic", nextLine[4]+" , "+lineNumber);
+                if(lineNumber++==0){continue;}
+                Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
                 entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                 xLabel.add(nextLine[1]);
             }
