@@ -1,19 +1,46 @@
 package in.sanrakshak.googleplaystore.models;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class AppDataModel {
 
+    @CsvBindByName(column = "App")
     private String appName;
+
+    @CsvBindByName(column = "Category")
     private String appCategory;
-    private String appSize;
+
+    @CsvBindByName(column = "Rating")
     private String appRating;
+
+    @CsvBindByName(column = "Reviews")
     private String appReviews;
+
+    @CsvBindByName(column = "Size")
+    private String appSize;
+
+    @CsvBindByName(column = "Installs")
     private String appInstalls;
+
+    @CsvBindByName(column = "Type")
     private String appType;
+
+    @CsvBindByName(column = "Price")
     private String appPrice;
+
+    @CsvBindByName(column = "Content Rating")
     private String appContentRating;
+
+    @CsvBindByName(column = "Genres")
     private String appGenres;
+
+    @CsvBindByName(column = "Last Updated")
     private String appLastUpdated;
+
+    @CsvBindByName(column = "Current Ver")
     private String appCurrentVer;
+
+    @CsvBindByName(column = "Android Ver")
     private String appAndroidVer;
 
     public AppDataModel(String appName, String appCategory, String appSize, String appRating, String appReviews,
