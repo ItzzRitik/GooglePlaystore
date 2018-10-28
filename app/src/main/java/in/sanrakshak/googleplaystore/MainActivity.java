@@ -278,18 +278,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String fileName = "src/main/assets/appdata.csv";
 
         try (FileInputStream fis = new FileInputStream(fileName);
-             InputStreamReader isr = new InputStreamReader(fis,
-                     StandardCharsets.UTF_8);
-             CSVReader reader = new CSVReader(isr)) {
+             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+             CSVReader reader = new CSVReader(isr))
+        {
             String[] nextLine;
-
             while ((nextLine = reader.readNext()) != null) {
-
                 for (String e : nextLine) {
                     System.out.format("%s ", e);
                 }
             }
         }
     }
-
 }
