@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 animator.start();
-            }},800);
+            }},500);
         }
     }
     @Override
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     Intent intent=new Intent(MainActivity.this,VizActivity.class);
                                     startActivity(intent);isViz=true;
                                     overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
-                                }},800);
+                                }},200);
                             }
                         });
                         animator.start();
