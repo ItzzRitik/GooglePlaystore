@@ -147,9 +147,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             @Override public void onAnimationCancel(Animator animator) {}
                             @Override public void onAnimationRepeat(Animator animator) {}
                             @Override public void onAnimationEnd(Animator animator) {
-                                Intent intent=new Intent(MainActivity.this,VizActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
+                                new Handler().postDelayed(new Runnable() {@Override public void run() {
+                                    Intent intent=new Intent(MainActivity.this,VizActivity.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
+                                }},1500);
                             }
                         });
                         animator.start();
