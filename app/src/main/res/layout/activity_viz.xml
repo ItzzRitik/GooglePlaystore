@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".VizActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hi"/>
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:id="@+id/hbc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
