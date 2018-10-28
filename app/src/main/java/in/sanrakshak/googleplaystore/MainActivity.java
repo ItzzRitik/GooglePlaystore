@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CsvToBean<AppDataModel> csvToBean = null;
 
         try {
-            fileReader = new BufferedReader(new InputStreamReader(getAssets().open("small.csv")));
+            fileReader = new BufferedReader(new InputStreamReader(getAssets().open("appdata.csv")));
             csvToBean = new CsvToBeanBuilder<AppDataModel>(fileReader)
                     .withType(AppDataModel.class)
                     .withIgnoreLeadingWhiteSpace(true)
