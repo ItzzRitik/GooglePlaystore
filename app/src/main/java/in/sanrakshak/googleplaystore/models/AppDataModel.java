@@ -2,8 +2,19 @@ package in.sanrakshak.googleplaystore.models;
 
 public class AppDataModel {
 
-    private String appName,appCategory,appSize,appRating,appReviews,appInstalls,appType,appPrice;
-    private String appContentRating,appGenres,appLastUpdated,appCurrentVer,appAndroidVer;
+    private String appName;
+    private String appCategory;
+    private String appSize;
+    private String appRating;
+    private String appReviews;
+    private String appInstalls;
+    private String appType;
+    private String appPrice;
+    private String appContentRating;
+    private String appGenres;
+    private String appLastUpdated;
+    private String appCurrentVer;
+    private String appAndroidVer;
     public AppDataModel(String appName, String appCategory, String appSize, String appRating, String appReviews,
                         String appInstalls, String appType, String appPrice, String appContentRating,String appGenres,
                         String appLastUpdated,String appCurrentVer,String appAndroidVer) {
