@@ -2,17 +2,22 @@ package in.sanrakshak.googleplaystore;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.opencsv.CSVReader;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
+    CSVReader reader;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -31,6 +36,10 @@ public class VizActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        try{
+            reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
+        }
+        catch (IOException e) { e.printStackTrace(); }
         hbc = findViewById(R.id.hbc);
 
         BarData data = new BarData(getDataSet());
@@ -50,5 +59,20 @@ public class VizActivity extends AppCompatActivity {
 
         BarDataSet dataset = new BarDataSet(entries,"hi");
         return dataset;
+    }
+    public void parseCSV()
+    {
+        try {
+            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
+            String [] nextLine;
+            int lineNumber = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                lineNumber++;
+                Log.w("coverPic", nextLine[4]+" , "+lineNumber);
+            }
+        }
+        catch (Exception e) {
+            Log.w("coverPic", e.toString());
+        }
     }
 }
