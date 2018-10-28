@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
         else{
-            g_sign_pane.setVisibility(View.GONE);
+            g_sign_pane.animate().translationY(-g_sign_pane.getHeight()).setDuration(500);
 
             assert account != null;
             profile_name.setText(Objects.requireNonNull(account).getDisplayName());
