@@ -1,10 +1,7 @@
 package in.sanrakshak.googleplaystore;
 
-
 import android.animation.Animator;
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -42,7 +39,6 @@ import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.gc.android.market.api.Main;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -75,7 +71,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GoogleSignInClient client;
     GoogleSignInAccount account;
     double fabX,fabY;
+    boolean isViz=false;
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isViz){
+            int cx = viz_pane.getWidth()/2;
+            int cy = viz_pane.getHeight()/2;
+            int finalRadius = Math.max(viz_pane.getWidth(), viz_pane.getHeight());
+            Animator animator=ViewAnimationUtils.createCircularReveal(viz_main_pane, cx, cy,finalRadius, viz.getWidth());
+            animator.setDuration(300);
+            animator.addListener(new Animator.AnimatorListener() {
+                @Override public void onAnimationStart(Animator animator) {}
+                @Override public void onAnimationCancel(Animator animator) {}
+                @Override public void onAnimationRepeat(Animator animator) {}
+                @Override public void onAnimationEnd(Animator animator) {
+                    viz_main_pane.setVisibility(View.GONE);
+                    float CurrentX = viz.getX();
+                    float CurrentY = viz.getY();
+                    Path path = new Path();
+                    path.moveTo(CurrentX, CurrentY);
+                    path.quadTo(CurrentX*3/7, (float)(CurrentY+fabY)*4/6, (float)fabX,(float) fabY);
+                    Animator startAnim = ObjectAnimator.ofFloat(viz, View.X, View.Y, path);
+                    startAnim.setDuration(300);
+                    startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                    startAnim.start();
+                }
+            });
+            animator.start();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             @Override public void onAnimationEnd(Animator animator) {
                                 new Handler().postDelayed(new Runnable() {@Override public void run() {
                                     Intent intent=new Intent(MainActivity.this,VizActivity.class);
-                                    startActivity(intent);
+                                    startActivity(intent);isViz=true;
                                     overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
                                 }},800);
                             }
@@ -224,14 +255,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(adapter);
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
