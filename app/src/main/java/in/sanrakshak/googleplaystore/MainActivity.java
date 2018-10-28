@@ -45,17 +45,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.sanrakshak.googleplaystore.adapters.ViewPagerAdapter;
 import in.sanrakshak.googleplaystore.fragments.main.HomeFragment;
+import in.sanrakshak.googleplaystore.models.AppDataModel;
 import in.sanrakshak.googleplaystore.viewPager.CustomViewPager;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -278,14 +282,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String fileName = "src/main/assets/appdata.csv";
 
         try (FileInputStream fis = new FileInputStream(fileName);
-             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-             CSVReader reader = new CSVReader(isr))
+             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8))
         {
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                for (String e : nextLine) {
-                    System.out.format("%s ", e);
-                }
+            CsvToBean<AppDataModel> csvToBean = new CsvToBeanBuilder<AppDataModel>(isr).withType(AppDataModel.class)
+                    .withIgnoreLeadingWhiteSpace(true).build();
+
+            for (AppDataModel csvUser : csvToBean) {
+                Log.w("coverPic", csvUser.getAppName());
+                Log.w("coverPic", csvUser.getAppCategory());
+                Log.w("coverPic", csvUser.getAppPrice());
             }
         }
     }
