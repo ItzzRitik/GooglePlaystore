@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     Intent intent=new Intent(MainActivity.this,VizActivity.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.splash_in, R.anim.splash_out);
-                                }},1500);
+                                }},800);
                             }
                         });
                         animator.start();
