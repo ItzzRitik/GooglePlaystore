@@ -9,9 +9,13 @@ public class VizActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.exit_in, R.anim.exit_out);
-        return true;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
