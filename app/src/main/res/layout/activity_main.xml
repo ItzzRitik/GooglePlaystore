@@ -85,6 +85,14 @@
                     android:layout_centerInParent="true"/>
             </RelativeLayout>
         </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/chart"
+            android:layout_gravity="end|bottom"
+            android:id="@+id/viz"/>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
