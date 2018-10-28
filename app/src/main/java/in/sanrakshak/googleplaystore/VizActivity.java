@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static java.lang.Float.NaN;
+
 public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
     CSVReader reader;
@@ -51,7 +53,8 @@ public class VizActivity extends AppCompatActivity {
         hbc.setData(data);
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);
-        hbc.setVisibleYRangeMaximum(6, YAxis.AxisDependency.LEFT);
+        hbc.setVisibleXRange(1000,10);
+        hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         hbc.invalidate();
 
     }
@@ -65,6 +68,7 @@ public class VizActivity extends AppCompatActivity {
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
+                if(Float.parseFloat(nextLine[2])==NaN){continue;}
                 entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                 xLabel.add(nextLine[1]);
             }
