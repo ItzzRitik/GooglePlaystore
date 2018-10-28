@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             g_sign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    parseCSV();/*
                     int cx = g_sign_pane.getWidth()/2;
                     int cy = g_sign.getBottom()-(g_sign.getHeight()/2);
                     Animator animator = ViewAnimationUtils.createCircularReveal(g_sign_pane2, cx, cy, g_sign.getWidth(),g_sign_pane.getHeight());
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent signInIntent = client.getSignInIntent();
                             startActivityForResult(signInIntent, 0);
                         }},500);
-                    }},400);*/
+                    }},400);
                 }
             });
         }
