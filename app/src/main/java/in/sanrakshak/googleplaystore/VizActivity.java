@@ -68,21 +68,21 @@ public class VizActivity extends AppCompatActivity {
             {
                 Toast.makeText(VizActivity.this, ""+position, Toast.LENGTH_SHORT).show();
                 if(position==0){
-                    hbc0.setElevation(10);
-                    hbc1.setElevation(5);
-                    hbc2.setElevation(5);
+                    hbc0.setVisibility(View.VISIBLE);
+                    hbc1.setVisibility(View.INVISIBLE);
+                    hbc2.setVisibility(View.INVISIBLE);
                     hbc0.animateXY(2000, 2000);
                 }
                 else if(position==1){
-                    hbc0.setElevation(5);
-                    hbc1.setElevation(10);
-                    hbc2.setElevation(5);
+                    hbc0.setVisibility(View.INVISIBLE);
+                    hbc1.setVisibility(View.VISIBLE);
+                    hbc2.setVisibility(View.INVISIBLE);
                     hbc1.animateXY(2000, 2000);
                 }
                 else if(position==2){
-                    hbc0.setElevation(5);
-                    hbc1.setElevation(5);
-                    hbc2.setElevation(10);
+                    hbc0.setVisibility(View.INVISIBLE);
+                    hbc1.setVisibility(View.INVISIBLE);
+                    hbc2.setVisibility(View.VISIBLE);
                     hbc2.animateXY(2000, 2000);
                 }
             }
