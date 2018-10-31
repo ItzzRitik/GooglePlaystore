@@ -3,6 +3,8 @@ package in.sanrakshak.googleplaystore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -24,6 +26,7 @@ public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
     CSVReader reader;
     ArrayList<String> xLabel;
+    Spinner hbc_sp;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -46,8 +49,15 @@ public class VizActivity extends AppCompatActivity {
             reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
         }
         catch (IOException e) { e.printStackTrace(); }
-        hbc = findViewById(R.id.hbc);
 
+
+        hbc_sp=findViewById(R.id.hbc_sp);
+        String[] items = new String[]{"Per Application", "Per Genre", "three"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        hbc_sp.setAdapter(adapter);
+
+
+        hbc = findViewById(R.id.hbc);
         BarData data = new BarData(getDataSet());
         hbc.setData(data);
         hbc.animateXY(2000, 2000);
