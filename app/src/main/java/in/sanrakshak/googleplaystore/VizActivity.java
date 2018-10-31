@@ -54,6 +54,7 @@ public class VizActivity extends AppCompatActivity {
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
+        hbc.moveViewToX(10);
         hbc.invalidate();
 
     }
@@ -67,11 +68,8 @@ public class VizActivity extends AppCompatActivity {
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 //Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
-                if(!nextLine[2].equals("NaN"))
-                {
-                    entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                    xLabel.add(nextLine[1]);
-                }
+                entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                xLabel.add(nextLine[1]);
 
             }
         }
