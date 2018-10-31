@@ -89,21 +89,17 @@ public class VizActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent){}
         });
         setHBCChart(0,hbc0);
-        setHBCChart(1,hbc1);
-        setHBCChart(2,hbc2);
-        hbc0.setData(new BarData(getDataSet(0)));
-        hbc1.setData(new BarData(getDataSet(1)));
-        hbc2.setData(new BarData(getDataSet(2)));
-        hbc0.invalidate();
-        hbc1.invalidate();
-        hbc2.invalidate();
     }
     public void setHBCChart(int type,HorizontalBarChart hbc){
+        hbc.setData(new BarData(getDataSet(type)));
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         hbc.moveViewToX(0);
+        hbc.invalidate();
+        if(type==0)setHBCChart(1,hbc1);
+        if(type==1)setHBCChart(2,hbc2);
     }
     private BarDataSet getDataSet(int type) {
 
