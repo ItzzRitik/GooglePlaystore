@@ -3,8 +3,11 @@ package in.sanrakshak.googleplaystore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -27,6 +30,9 @@ public class VizActivity extends AppCompatActivity {
     CSVReader reader;
     ArrayList<String> xLabel;
     Spinner hbc_sp;
+    String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
+    "Current Ver","Android Ver"};
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -52,23 +58,33 @@ public class VizActivity extends AppCompatActivity {
 
 
         hbc_sp=findViewById(R.id.hbc_sp);
-        String[] items = new String[]{"Per Application", "Per Genre", "three"};
+        String[] items = new String[]{"Ratings Per Application", " Ratings Per Genre", "Ratings Per Category"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         hbc_sp.setAdapter(adapter);
+        hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                setHBCChart(position);
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
 
+            }
+        });
 
         hbc = findViewById(R.id.hbc);
-        BarData data = new BarData(getDataSet());
-        hbc.setData(data);
+
+    }
+    public void setHBCChart(int type){
+        hbc.setData(new BarData(getDataSet(type)));
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         hbc.moveViewToX(0);
         hbc.invalidate();
-
     }
-    private BarDataSet getDataSet() {
+    private BarDataSet getDataSet(int type) {
 
         ArrayList<BarEntry> entries = new ArrayList<>();
         xLabel = new ArrayList<>();
@@ -78,9 +94,16 @@ public class VizActivity extends AppCompatActivity {
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 //Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
+                if(type==0){
+                    xLabel.add(nextLine[0]);
+                }
+                else if (type==1){
+                    xLabel.add(nextLine[9]);
+                }
+                else if (type==2){
+                    xLabel.add(nextLine[2]);
+                }
                 entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                xLabel.add(nextLine[1]);
-
             }
         }
         catch (Exception e) {
