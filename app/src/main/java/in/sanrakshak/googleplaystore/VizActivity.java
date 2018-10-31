@@ -71,11 +71,9 @@ public class VizActivity extends AppCompatActivity {
 
             }
         });
-
-        hbc = findViewById(R.id.hbc);
-
-    }
+            }
     public void setHBCChart(int type){
+        hbc = findViewById(R.id.hbc);
         hbc.setData(new BarData(getDataSet(type)));
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);
