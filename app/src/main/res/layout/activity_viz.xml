@@ -20,19 +20,19 @@
             android:id="@+id/hbc0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
-            android:visibility="visible"/>
+            android:elevation="10dp"
+            android:layout_marginTop="60dp"/>
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/hbc1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
-            android:visibility="gone"/>
+            android:elevation="9dp"
+            android:layout_marginTop="60dp"/>
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/hbc2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
-            android:visibility="gone"/>
+            android:elevation="9dp"
+            android:layout_marginTop="60dp"/>
     </RelativeLayout>
 </RelativeLayout>
