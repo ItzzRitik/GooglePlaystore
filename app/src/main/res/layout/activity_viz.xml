@@ -17,9 +17,22 @@
             android:layout_margin="10dp"
             android:spinnerMode="dropdown"/>
         <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/hbc"
+            android:id="@+id/hbc0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="60dp"
+            android:visibility="visible"/>
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/hbc1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:visibility="gone"/>
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/hbc2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:visibility="gone"/>
     </RelativeLayout>
 </RelativeLayout>

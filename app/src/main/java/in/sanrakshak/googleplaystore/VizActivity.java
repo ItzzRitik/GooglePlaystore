@@ -26,13 +26,13 @@ import java.util.Objects;
 
 
 public class VizActivity extends AppCompatActivity {
-    HorizontalBarChart hbc;
+    HorizontalBarChart hbc0,hbc1,hbc2;
     CSVReader reader;
     ArrayList<String> xLabel;
     Spinner hbc_sp;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
     "Current Ver","Android Ver"};
-
+    int run=0;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -56,7 +56,9 @@ public class VizActivity extends AppCompatActivity {
         }
         catch (IOException e) { e.printStackTrace(); }
 
-
+        hbc0 = findViewById(R.id.hbc0);
+        hbc1 = findViewById(R.id.hbc1);
+        hbc2 = findViewById(R.id.hbc2);
         hbc_sp=findViewById(R.id.hbc_sp);
         String[] items = new String[]{"Ratings Per Application", " Ratings Per Genre", "Ratings Per Category"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -64,22 +66,41 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setHBCChart(position);
+                if(position==0){
+                    hbc0.setVisibility(View.VISIBLE);
+                    hbc1.setVisibility(View.GONE);
+                    hbc2.setVisibility(View.GONE);
+                }
+                else if(position==1){
+                    hbc0.setVisibility(View.GONE);
+                    hbc1.setVisibility(View.VISIBLE);
+                    hbc2.setVisibility(View.GONE);
+                }
+                else if(position==2){
+                    hbc0.setVisibility(View.GONE);
+                    hbc1.setVisibility(View.GONE);
+                    hbc2.setVisibility(View.VISIBLE);
+                }
             }
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent){}
         });
-            }
-    public void setHBCChart(int type){
-        hbc = findViewById(R.id.hbc);
+        setHBCChart(0,hbc0);
+        setHBCChart(1,hbc1);
+        setHBCChart(2,hbc2);
+    }
+    public void setHBCChart(int type,HorizontalBarChart hbc){
         hbc.setData(new BarData(getDataSet(type)));
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         hbc.moveViewToX(0);
+        hbc.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return xLabel.get((int) value);
+            }
+        });
         hbc.invalidate();
     }
     private BarDataSet getDataSet(int type) {
@@ -91,7 +112,9 @@ public class VizActivity extends AppCompatActivity {
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
-                //Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
+//                Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
+
+                Log.w("coverPic", type+"");
                 if(type==0){
                     xLabel.add(nextLine[0]);
                 }
@@ -107,13 +130,6 @@ public class VizActivity extends AppCompatActivity {
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
-        XAxis xAxis = hbc.getXAxis();
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return xLabel.get((int) value);
-            }
-        });
         return new BarDataSet(entries,"Ratings");
     }
 }
