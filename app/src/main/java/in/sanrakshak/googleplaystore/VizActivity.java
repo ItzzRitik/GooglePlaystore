@@ -54,7 +54,7 @@ public class VizActivity extends AppCompatActivity {
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
-        hbc.moveViewToX(10);
+        hbc.moveViewToX(0);
         hbc.invalidate();
 
     }
