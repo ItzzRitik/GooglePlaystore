@@ -74,7 +74,7 @@ public class VizActivity extends AppCompatActivity {
         });
         //setHBCChart(0,cartesian);
     }
-    public void setChart(int type,Cartesian hbc){
+    public void setChart(int type,Cartesian cartesian){
         ArrayList<DataEntry> data = new ArrayList<>();
         try {
             String [] nextLine;
@@ -115,7 +115,6 @@ public class VizActivity extends AppCompatActivity {
         cartesian.interactivity().hoverMode(HoverMode.BY_X);
         cartesian.xAxis(0).title("Product");
         cartesian.yAxis(0).title("Revenue");
-
         hbc.setChart(cartesian);
     }
 }
