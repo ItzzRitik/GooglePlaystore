@@ -9,14 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -26,7 +23,8 @@ import java.util.Objects;
 
 
 public class VizActivity extends AppCompatActivity {
-    HorizontalBarChart hbc0,hbc1,hbc2;
+    AnyChartView hbc0;
+    Cartesian cartesian;
     CSVReader reader;
     ArrayList<String> xLabel;
     Spinner hbc_sp;
@@ -57,8 +55,8 @@ public class VizActivity extends AppCompatActivity {
         catch (IOException e) { e.printStackTrace(); }
 
         hbc0 = findViewById(R.id.hbc0);
-        hbc1 = findViewById(R.id.hbc1);
-        hbc2 = findViewById(R.id.hbc2);
+        cartesian = AnyChart.column();
+
         hbc_sp=findViewById(R.id.hbc_sp);
         String[] items = new String[]{"Ratings Per Application", " Ratings Per Genre", "Ratings Per Category"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -66,71 +64,34 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(VizActivity.this, ""+position, Toast.LENGTH_SHORT).show();
-                if(position==0){
-                    hbc0.setVisibility(View.VISIBLE);
-                    hbc1.setVisibility(View.INVISIBLE);
-                    hbc2.setVisibility(View.INVISIBLE);
-                    hbc0.animateXY(2000, 2000);
-                }
-                else if(position==1){
-                    hbc0.setVisibility(View.INVISIBLE);
-                    hbc1.setVisibility(View.VISIBLE);
-                    hbc2.setVisibility(View.INVISIBLE);
-                    hbc1.animateXY(2000, 2000);
-                }
-                else if(position==2){
-                    hbc0.setVisibility(View.INVISIBLE);
-                    hbc1.setVisibility(View.INVISIBLE);
-                    hbc2.setVisibility(View.VISIBLE);
-                    hbc2.animateXY(2000, 2000);
-                }
+                setHBCChart(position,cartesian);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
-        setHBCChart(0,hbc0);
+        //setHBCChart(0,cartesian);
     }
-    public void setHBCChart(int type,HorizontalBarChart hbc){
-        hbc.setData(new BarData(getDataSet(type)));
-        hbc.animateXY(2000, 2000);
-        hbc.setVisibleXRangeMaximum(100);
-        hbc.setVisibleXRange(1000,10);
-        hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
-        hbc.moveViewToX(0);
-        hbc.invalidate();
-        if(type==0)setHBCChart(1,hbc1);
-        if(type==1)setHBCChart(2,hbc2);
-    }
-    private BarDataSet getDataSet(int type) {
-
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        xLabel=new ArrayList<>();
+    public void setHBCChart(int type,Cartesian hbc){
+        ArrayList<DataEntry> data = new ArrayList<>();
         try {
             String [] nextLine;
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
-//                Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
-
+//              Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
                 Log.w("coverPic", type+"");
                 if(type==0){
-                    xLabel.add(nextLine[0]);
-                    entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    data.add(new ValueDataEntry(nextLine[0], Float.parseFloat(nextLine[2])));
                 }
                 else if (type==1){
-                    xLabel.add(nextLine[1]);
-                    entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    data.add(new ValueDataEntry(nextLine[1], Float.parseFloat(nextLine[2])));
                 }
                 else if (type==2){
-                    xLabel.add(nextLine[9]);
-                    entries.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    data.add(new ValueDataEntry(nextLine[9], Float.parseFloat(nextLine[2])));
                 }
             }
-
         }
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
-        return new BarDataSet(entries,"Ratings");
     }
 }
