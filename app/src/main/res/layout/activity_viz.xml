@@ -17,11 +17,11 @@
             android:layout_margin="10dp"
             android:spinnerMode="dropdown"/>
         <com.anychart.AnyChartView
-            android:id="@+id/hbc0"
+            android:id="@+id/hbc"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <ProgressBar
-            android:id="@+id/progress_bar"
+            android:id="@+id/hbc_pro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

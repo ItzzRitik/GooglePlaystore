@@ -28,14 +28,12 @@ import java.util.Objects;
 
 
 public class VizActivity extends AppCompatActivity {
-    AnyChartView hbc0;
+    AnyChartView hbc;
     Cartesian cartesian;
     CSVReader reader;
-    ArrayList<String> xLabel;
     Spinner hbc_sp;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
     "Current Ver","Android Ver"};
-    int run=0;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -59,7 +57,8 @@ public class VizActivity extends AppCompatActivity {
         }
         catch (IOException e) { e.printStackTrace(); }
 
-        hbc0 = findViewById(R.id.hbc0);
+        hbc = findViewById(R.id.hbc);
+        hbc.setProgressBar(findViewById(R.id.hbc_pro));
         cartesian = AnyChart.column();
 
         hbc_sp=findViewById(R.id.hbc_sp);
@@ -117,6 +116,6 @@ public class VizActivity extends AppCompatActivity {
         cartesian.xAxis(0).title("Product");
         cartesian.yAxis(0).title("Revenue");
 
-        hbc0.setChart(cartesian);
+        hbc.setChart(cartesian);
     }
 }
