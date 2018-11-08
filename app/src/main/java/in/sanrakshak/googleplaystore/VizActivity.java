@@ -14,6 +14,11 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -64,13 +69,13 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setHBCChart(position,cartesian);
+                setChart(position,cartesian);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
         //setHBCChart(0,cartesian);
     }
-    public void setHBCChart(int type,Cartesian hbc){
+    public void setChart(int type,Cartesian hbc){
         ArrayList<DataEntry> data = new ArrayList<>();
         try {
             String [] nextLine;
@@ -93,5 +98,25 @@ public class VizActivity extends AppCompatActivity {
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
+
+        Column column = cartesian.column(data);
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("${%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.title("Top 10 Cosmetic Products by Revenue");
+        cartesian.yScale().minimum(0d);
+        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+        cartesian.xAxis(0).title("Product");
+        cartesian.yAxis(0).title("Revenue");
+
+        hbc0.setChart(cartesian);
     }
 }
