@@ -81,10 +81,10 @@ public class VizActivity extends AppCompatActivity {
             int lineNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
-//              Log.w("coverPic", nextLine[1]+" - "+nextLine[2]);
-                Log.w("coverPic", type+"");
+                //Log.w("coverPic", type+"");
                 if(type==0){
                     data.add(new ValueDataEntry(nextLine[0], Float.parseFloat(nextLine[2])));
+                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==1){
                     data.add(new ValueDataEntry(nextLine[1], Float.parseFloat(nextLine[2])));
