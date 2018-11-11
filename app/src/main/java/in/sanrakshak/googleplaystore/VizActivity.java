@@ -68,13 +68,13 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setChart(position,cartesian);
+                setChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
         //setHBCChart(0,cartesian);
     }
-    public void setChart(int type,Cartesian cartesian){
+    public void setChart(int type){
         ArrayList<DataEntry> data = new ArrayList<>();
         try {
             String [] nextLine;
