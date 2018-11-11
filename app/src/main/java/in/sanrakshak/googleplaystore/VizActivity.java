@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.opencsv.CSVReader;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -19,7 +20,6 @@ import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
-import com.opencsv.CSVReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -72,7 +72,6 @@ public class VizActivity extends AppCompatActivity {
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
-        //setHBCChart(0,cartesian);
     }
     public void setChart(int type){
         ArrayList<DataEntry> data = new ArrayList<>();
@@ -97,7 +96,7 @@ public class VizActivity extends AppCompatActivity {
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
-
+        Toast.makeText(this, "Done - "+data.size(), Toast.LENGTH_SHORT).show();
         Column column = cartesian.column(data);
         column.tooltip()
                 .titleFormat("{%X}")
