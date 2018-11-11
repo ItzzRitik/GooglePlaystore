@@ -93,7 +93,6 @@ public class VizActivity extends AppCompatActivity {
                 else if (type==2){
                     //data.add(new ValueDataEntry(nextLine[9], Float.parseFloat(nextLine[2])));
                 }
-                if(name.size()==100){break;}
             }
         }
         catch (Exception e) {
