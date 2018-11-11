@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
@@ -98,10 +100,14 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic", e.toString());
         }
         Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
-        XAxis xAxis = hbc.getXAxis();
-        xAxis.setValueFormatter(new BarChartXaxisFormatter(name));
-        BarDataSet set1 = new BarDataSet(data, "Data");
-        set1.setColor(Color.BLUE);
+        hbc.setData(new BarData(new BarDataSet(data, "Data")));
+        hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
+        hbc.animateXY(2000, 2000);
+        hbc.setVisibleXRangeMaximum(100);
+        hbc.setVisibleXRange(1000,10);
+        hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
+        hbc.moveViewToX(0);
+        hbc.invalidate();
     }
     public class BarChartXaxisFormatter implements IAxisValueFormatter {
 
