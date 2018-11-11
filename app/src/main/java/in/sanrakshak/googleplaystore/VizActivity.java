@@ -1,5 +1,6 @@
 package in.sanrakshak.googleplaystore;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.opencsv.CSVReader;
 
 
@@ -23,6 +29,7 @@ public class VizActivity extends AppCompatActivity {
     HorizontalBarChart hbc;
     CSVReader reader;
     Spinner hbc_sp;
+    ArrayList<String> name;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
     "Current Ver","Android Ver"};
     @Override
@@ -64,7 +71,8 @@ public class VizActivity extends AppCompatActivity {
         setChart(0);
     }
     public void setChart(int type){
-        ArrayList<String> name = new ArrayList<>();
+        name = new ArrayList<>();
+        ArrayList<BarEntry> data = new ArrayList<>();
         try {
             String [] nextLine;
             int lineNumber = 0;
@@ -74,6 +82,7 @@ public class VizActivity extends AppCompatActivity {
                 if(type==0){
                     //data.add(new ValueDataEntry(nextLine[0], Float.parseFloat(nextLine[2])));
                     name.add(nextLine[0]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                     Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==1){
@@ -89,6 +98,31 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic", e.toString());
         }
         Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
-
+        XAxis xAxis = hbc.getXAxis();
+        xAxis.setValueFormatter(new BarChartXaxisFormatter(name));
+        BarDataSet set1 = new BarDataSet(data, "Data");
+        set1.setColor(Color.BLUE);
     }
+    public class BarChartXaxisFormatter implements IAxisValueFormatter {
+
+        ArrayList<String> mValues;
+
+        public BarChartXaxisFormatter(ArrayList<String> values) {
+            this.mValues = values;
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+
+            int val = (int) value;
+            String label = "";
+            if (val >= 0 && val < mValues.size()) {
+                label = mValues.get(val);
+            } else {
+                label = "";
+            }
+            return label;
+        }
+    }
+
 }
