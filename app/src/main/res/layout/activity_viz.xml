@@ -16,15 +16,11 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:spinnerMode="dropdown"/>
-        <com.anychart.AnyChartView
+        <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/hbc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="60dp"
             android:background="#000000"/>
-        <ProgressBar
-            android:id="@+id/hbc_pro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
 </RelativeLayout>

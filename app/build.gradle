@@ -16,6 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
 }
 
 dependencies {
@@ -28,7 +39,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.opencsv:opencsv:4.1'
-    implementation 'com.github.AnyChart:AnyChart-Android:1.0.5'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 
     implementation('com.github.arimorty:floatingsearchview:2.1.1') {
         exclude group: 'com.android.support'
