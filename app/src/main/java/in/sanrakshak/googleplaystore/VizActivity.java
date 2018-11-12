@@ -243,11 +243,9 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic error", e.toString());
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Legends");
+        PieDataSet dataSet = new PieDataSet(entries, "Pie Information");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-
-        // add a lot of colors
 
         ArrayList<Integer> colors = new ArrayList<>();
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
