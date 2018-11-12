@@ -7,17 +7,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.imangazaliev.circlemenu.CircleMenu;
+import com.imangazaliev.circlemenu.CircleMenuButton;
 import com.opencsv.CSVReader;
 
 
@@ -28,7 +30,9 @@ import java.util.Objects;
 
 
 public class VizActivity extends AppCompatActivity {
+    CircleMenu circle_menu;
     HorizontalBarChart hbc;
+    RelativeLayout hbc_pane;
     CSVReader reader;
     Spinner hbc_sp;
     ArrayList<String> name;
@@ -52,8 +56,18 @@ public class VizActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        hbc = findViewById(R.id.hbc);
+        circle_menu=findViewById(R.id.circle_menu);
+        circle_menu.setOnItemClickListener(new CircleMenu.OnItemClickListener() {
+            @Override
+            public void onItemClick(CircleMenuButton menuButton) {
+                if(menuButton.getId()==R.id.hbc_ico){
+                    hbc_pane.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
+        hbc_pane=findViewById(R.id.hbc_pane);
+        hbc = findViewById(R.id.hbc);
         hbc_sp=findViewById(R.id.hbc_sp);
         String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
         "Reviews Per Application","Reviews Per Genre", "Reviews Per Category",
