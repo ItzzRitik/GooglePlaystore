@@ -56,7 +56,8 @@ public class VizActivity extends AppCompatActivity {
 
         hbc_sp=findViewById(R.id.hbc_sp);
         String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
-        "Reviews Per Application","Reviews Per Genre", "Reviews Per Category"};
+        "Reviews Per Application","Reviews Per Genre", "Reviews Per Category",
+        "Installs Per Application","Installs Per Genre","Installs Per Category"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         hbc_sp.setAdapter(adapter);
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -68,6 +69,7 @@ public class VizActivity extends AppCompatActivity {
         });
     }
     public void setHBCChart(int type){
+        int wordLen=15;
         name = new ArrayList<>();
         ArrayList<BarEntry> data = new ArrayList<>();
         try {
@@ -81,55 +83,84 @@ public class VizActivity extends AppCompatActivity {
                 if(lineNumber++==0){continue;}
                 //Log.w("coverPic", type+"");
                 if(type==0){
-                    name.add(nextLine[0]);
+                    String temp=nextLine[0];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                 }
                 else if (type==1){
-                    name.add(nextLine[1]);
+                    String temp=nextLine[1];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                 }
                 else if (type==2){
-                    name.add(nextLine[9]);
+                    String temp=nextLine[9];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                 }
                 else if(type==3){
-                    name.add(nextLine[0]);
+                    String temp=nextLine[0];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
                 }
                 else if (type==4){
-                    name.add(nextLine[1]);
+                    String temp=nextLine[1];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
                 }
                 else if (type==5){
-                    name.add(nextLine[9]);
+                    String temp=nextLine[9];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
+                }
+                else if(type==6){
+                    String temp=nextLine[0];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
+                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
+                }
+                else if (type==7){
+                    String temp=nextLine[1];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
+                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
+                }
+                else if (type==8){
+                    String temp=nextLine[9];
+                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
+                    name.add(temp);
+                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
+
                 }
             }
         }
         catch (Exception e) {
             Log.w("coverPic", e.toString());
         }
-        Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Number of data - "+name.size(), Toast.LENGTH_SHORT).show();
         hbc.setData(new BarData(new BarDataSet(data, "Apps")));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
+        hbc.setVisibleXRange(1000,10);
         if(type>=0 && type<=2){
-            hbc.setVisibleXRangeMaximum(100);
-            hbc.setVisibleXRange(1000,10);
             hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         }
         else if(type>=3 && type<=5){
-            hbc.setVisibleXRangeMaximum(100);
-            hbc.setVisibleXRange(1000,10);
             hbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
+        }
+        else if(type>=6 && type<=8){
+            hbc.setVisibleYRange(1000,100000, YAxis.AxisDependency.LEFT);
         }
         hbc.animateXY(1000, 1000);
         hbc.moveViewToX(0);
         hbc.invalidate();
     }
     public class BarChartXaxisFormatter implements IAxisValueFormatter {
-
         ArrayList<String> mValues;
-
         BarChartXaxisFormatter(ArrayList<String> values) {
             this.mValues = values;
         }
