@@ -208,14 +208,6 @@ public class VizActivity extends AppCompatActivity {
         ArrayList<Integer> colors = new ArrayList<>();
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
         colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
 
@@ -239,10 +231,10 @@ public class VizActivity extends AppCompatActivity {
         SpannableString s = new SpannableString("Store PieChart\ndeveloped by Ritik Srivastava");
         s.setSpan(new RelativeSizeSpan(1.5f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-        s.setSpan(new RelativeSizeSpan(.65f), 14, s.length() - 15, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 16, 0);
+        s.setSpan(new RelativeSizeSpan(.65f), 14, s.length() - 16, 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 16, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 16, s.length(), 0);
         return s;
     }
     public void setBarChart(int type){
