@@ -128,6 +128,7 @@ public class VizActivity extends AppCompatActivity {
 
         vbc_pane=findViewById(R.id.vbc_pane);
         vbc = findViewById(R.id.vbc);
+        vbc.getDescription().setEnabled(false);
         vbc_sp=findViewById(R.id.vbc_sp);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         vbc_sp.setAdapter(adapter);
@@ -141,6 +142,7 @@ public class VizActivity extends AppCompatActivity {
 
         hbc_pane=findViewById(R.id.hbc_pane);
         hbc = findViewById(R.id.hbc);
+        hbc.getDescription().setEnabled(false);
         hbc_sp=findViewById(R.id.hbc_sp);
         hbc_sp.setAdapter(adapter);
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,7 +191,7 @@ public class VizActivity extends AppCompatActivity {
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
-        l.setEnabled(false);
+        l.setEnabled(true);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
         try {
