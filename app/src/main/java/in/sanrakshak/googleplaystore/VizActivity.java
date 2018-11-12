@@ -143,7 +143,9 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic", e.toString());
         }
         Toast.makeText(this, "Number of data - "+name.size(), Toast.LENGTH_SHORT).show();
-        hbc.setData(new BarData(new BarDataSet(data, "Apps")));
+        BarDataSet dataSet = new BarDataSet(data, "Score");
+        dataSet.setColor(getResources().getColor(R.color.hbc));
+        hbc.setData(new BarData(dataSet));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         hbc.setVisibleXRange(1000,10);
         if(type>=0 && type<=2){
