@@ -224,7 +224,9 @@ public class VizActivity extends AppCompatActivity {
                 }
                 else if(type==1){
                     if(nextLine[6].toLowerCase().equals("free")){premium_type[0]++;}
-                    else ratings[1]++;
+                    else premium_type[1]++;
+
+                    Log.w("coverPic",nextLine[6]+" - "+nextLine[6].toLowerCase().equals("free"));
                 }
             }
             if(type==0){
