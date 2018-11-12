@@ -62,13 +62,12 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setChart(position);
+                setHBCChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
-        //setChart(0);
     }
-    public void setChart(int type){
+    public void setHBCChart(int type){
         name = new ArrayList<>();
         ArrayList<BarEntry> data = new ArrayList<>();
         try {
@@ -113,10 +112,17 @@ public class VizActivity extends AppCompatActivity {
         Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
         hbc.setData(new BarData(new BarDataSet(data, "Apps")));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
+        if(type>=0 && type<=2){
+            hbc.setVisibleXRangeMaximum(100);
+            hbc.setVisibleXRange(1000,10);
+            hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
+        }
+        else if(type>=3 && type<=5){
+            hbc.setVisibleXRangeMaximum(100);
+            hbc.setVisibleXRange(1000,10);
+            hbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
+        }
         hbc.animateXY(1000, 1000);
-        hbc.setVisibleXRangeMaximum(100);
-        hbc.setVisibleXRange(1000,10);
-        hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         hbc.moveViewToX(0);
         hbc.invalidate();
     }
@@ -124,7 +130,7 @@ public class VizActivity extends AppCompatActivity {
 
         ArrayList<String> mValues;
 
-        public BarChartXaxisFormatter(ArrayList<String> values) {
+        BarChartXaxisFormatter(ArrayList<String> values) {
             this.mValues = values;
         }
 
