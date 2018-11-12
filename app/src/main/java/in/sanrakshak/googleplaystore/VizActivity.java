@@ -235,8 +235,8 @@ public class VizActivity extends AppCompatActivity {
                 }
             }
             else if(type==1){
-                entries.add(new PieEntry(ratings[0],"Free"));
-                entries.add(new PieEntry(ratings[1],"Premium"));
+                entries.add(new PieEntry(premium_type[0],"Free"));
+                entries.add(new PieEntry(premium_type[1],"Premium"));
             }
 
         }
