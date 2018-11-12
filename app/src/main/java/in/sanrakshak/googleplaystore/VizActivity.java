@@ -154,12 +154,12 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setBarChart(position);
+                setPieChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
     }
-    public void setPieChart(){
+    public void setPieChart(int type){
         pie.setUsePercentValues(true);
         pie.getDescription().setEnabled(false);
         pie.setExtraOffsets(5, 10, 5, 5);
