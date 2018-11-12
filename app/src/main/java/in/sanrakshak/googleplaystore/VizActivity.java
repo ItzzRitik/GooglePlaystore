@@ -165,6 +165,8 @@ public class VizActivity extends AppCompatActivity {
         pie_pane=findViewById(R.id.pie_pane);
         pie = findViewById(R.id.pie);
         pie_sp=findViewById(R.id.pie_sp);
+        String pieItems[]={"Ratings","Premium Type"};
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pieItems);
         pie_sp.setAdapter(adapter);
         pie_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -191,6 +193,7 @@ public class VizActivity extends AppCompatActivity {
         pie.setRotationAngle(0);
         pie.setRotationEnabled(true);
         pie.setHighlightPerTapEnabled(true);
+        pie.setDrawSliceText(false);
         pie.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
 
         pie.animateY(1400, Easing.EaseInOutQuad);
@@ -207,6 +210,7 @@ public class VizActivity extends AppCompatActivity {
             String [] nextLine;
             int lineNumber = 0;
             int ratings[]={0,0,0,0,0};
+            int premium_type[]={0,0};
             try{
                 reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
             }
@@ -215,21 +219,30 @@ public class VizActivity extends AppCompatActivity {
                 if(lineNumber++==0){continue;}
                 if(type==0){
                     int rate=(int)Float.parseFloat(nextLine[2]);
-                    Log.w("coverPic",rate+" - "+nextLine[0]);
                     if(rate==5) ratings[4]++;
                     else ratings[(int)(Float.parseFloat(nextLine[2]))]++;
                 }
+                else if(type==1){
+                    if(nextLine[6].toLowerCase().equals("free")){premium_type[0]++;}
+                    else ratings[1]++;
+                }
             }
-            for (int i=0;i<ratings.length;i++) {
-                entries.add(new PieEntry(ratings[i],i+" - "+(i+1)+" ★"));
-                Log.w("coverPic",ratings[i]+" ----> "+i+" - "+(i+1)+" ★");
+            if(type==0){
+                for (int i=0;i<ratings.length;i++) {
+                    entries.add(new PieEntry(ratings[i],i+" - "+(i+1)+" ★ - "+ratings[i]+" Apps"));
+                }
             }
+            else if(type==1){
+                entries.add(new PieEntry(ratings[0],"Free"));
+                entries.add(new PieEntry(ratings[1],"Premium"));
+            }
+
         }
         catch (Exception e) {
             Log.w("coverPic error", e.toString());
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "App Ratings");
+        PieDataSet dataSet = new PieDataSet(entries, "Legends");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
 
