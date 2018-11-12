@@ -52,11 +52,6 @@ public class VizActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        try{
-            reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
-        }
-        catch (IOException e) { e.printStackTrace(); }
-
         hbc = findViewById(R.id.hbc);
 
         hbc_sp=findViewById(R.id.hbc_sp);
@@ -78,6 +73,10 @@ public class VizActivity extends AppCompatActivity {
         try {
             String [] nextLine;
             int lineNumber = 0;
+            try{
+                reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
+            }
+            catch (IOException e) { e.printStackTrace(); }
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 //Log.w("coverPic", type+"");
@@ -104,7 +103,7 @@ public class VizActivity extends AppCompatActivity {
         Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
         hbc.setData(new BarData(new BarDataSet(data, "Apps")));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
-        hbc.animateXY(2000, 2000);
+        hbc.animateXY(1000, 1000);
         hbc.setVisibleXRangeMaximum(100);
         hbc.setVisibleXRange(1000,10);
         hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
@@ -123,7 +122,7 @@ public class VizActivity extends AppCompatActivity {
         public String getFormattedValue(float value, AxisBase axis) {
 
             int val = (int) value;
-            String label = "";
+            String label;
             if (val >= 0 && val < mValues.size()) {
                 label = mValues.get(val);
             } else {
