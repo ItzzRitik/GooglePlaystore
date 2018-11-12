@@ -6,10 +6,41 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".VizActivity">
+    <com.imangazaliev.circlemenu.CircleMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/circleMenu">
+
+        <com.imangazaliev.circlemenu.CircleMenuButton
+            android:id="@+id/favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:colorNormal="#2196F3"
+            app:colorPressed="#1E88E5"
+            app:icon="@drawable/ic_favorite"/>
+
+        <com.imangazaliev.circlemenu.CircleMenuButton
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:colorNormal="#4CAF50"
+            app:colorPressed="#43A047"
+            app:icon="@drawable/ic_search"/>
+
+        <com.imangazaliev.circlemenu.CircleMenuButton
+            android:id="@+id/alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:colorNormal="#F44336"
+            app:colorPressed="#E53935"
+            app:icon="@drawable/ic_alert"/>
+
+    </com.imangazaliev.circlemenu.CircleMenu>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/hbc_pane">
         <Spinner
             android:id="@+id/hbc_sp"

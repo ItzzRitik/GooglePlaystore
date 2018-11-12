@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.opencsv:opencsv:4.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+    implementation 'com.github.imangazalievm:circlemenu:2.0.2'
 
     implementation('com.github.arimorty:floatingsearchview:2.1.1') {
         exclude group: 'com.android.support'
