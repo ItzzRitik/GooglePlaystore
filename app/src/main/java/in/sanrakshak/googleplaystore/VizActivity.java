@@ -210,7 +210,7 @@ public class VizActivity extends AppCompatActivity {
         BarDataSet dataSet = new BarDataSet(data, "Score");
         dataSet.setColor(getResources().getColor(R.color.hbc));
         hbc.setData(new BarData(dataSet));
-        hbc.setVisibleXRange(1000,3);
+        hbc.setVisibleXRange(1000,8);
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         if(type>=0 && type<=2){
             hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
