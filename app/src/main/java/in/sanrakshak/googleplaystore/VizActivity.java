@@ -209,9 +209,9 @@ public class VizActivity extends AppCompatActivity {
                     else ratings[(int)(Float.parseFloat(nextLine[2]))]++;
                 }
             }
-            for (int c : ratings) {
-                entries.add(new PieEntry(c));
-                Log.w("coverPic",c+"");
+            for (int i=0;i<ratings.length;i++) {
+                entries.add(new PieEntry(ratings[i],i+" - "+(i+1)+" ★"));
+                Log.w("coverPic",ratings[i]+" ----> "+i+" - "+(i+1)+" ★");
             }
         }
         catch (Exception e) {
