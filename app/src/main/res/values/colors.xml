@@ -10,8 +10,11 @@
     <color name="colorGreyTransparent">#50000000</color>
 
     <color name="hbc">#2196F3</color>
+    <color name="hbc_dark">#1E88E5</color>
     <color name="vbc">#4CAF50</color>
+    <color name="vbc_dark">#43A047</color>
     <color name="pie">#F44336</color>
+    <color name="pie_dark">#E53935</color>
 
 
     <color name="colorPageGrey">#EEEEEE</color>

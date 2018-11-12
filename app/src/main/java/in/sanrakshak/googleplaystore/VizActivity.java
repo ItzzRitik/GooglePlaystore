@@ -2,6 +2,7 @@ package in.sanrakshak.googleplaystore;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -113,13 +114,17 @@ public class VizActivity extends AppCompatActivity {
             public void onButtonClickAnimationEnd(@NonNull CircleMenuButton menuButton) {
                 if(menuButton.getId()==R.id.hbc_ico){
                     setTitle("Horizontal Bars");
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.hbc)));
+
                     hbc_pane.setVisibility(View.VISIBLE);
                 }
                 else if(menuButton.getId()==R.id.vbc_ico){
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.vbc)));
                     setTitle("Vertical Bars");
                     vbc_pane.setVisibility(View.VISIBLE);
                 }
                 else if(menuButton.getId()==R.id.pie_ico){
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.pie)));
                     setTitle("Pie Charts");
                     pie_pane.setVisibility(View.VISIBLE);
                 }
