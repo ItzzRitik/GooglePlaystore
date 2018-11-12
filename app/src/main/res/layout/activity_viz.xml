@@ -57,4 +57,23 @@
             android:layout_marginTop="60dp"
             android:layout_marginBottom="15dp"/>
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#fff"
+        android:id="@+id/vbc_pane">
+        <Spinner
+            android:id="@+id/vbc_sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:spinnerMode="dropdown"/>
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/vbc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="15dp"/>
+    </RelativeLayout>
 </RelativeLayout>
