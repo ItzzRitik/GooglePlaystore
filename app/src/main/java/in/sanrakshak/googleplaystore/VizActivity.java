@@ -55,7 +55,8 @@ public class VizActivity extends AppCompatActivity {
         hbc = findViewById(R.id.hbc);
 
         hbc_sp=findViewById(R.id.hbc_sp);
-        String[] items = new String[]{"Ratings Per Application", " Ratings Per Genre", "Ratings Per Category"};
+        String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
+        "Reviews Per Application","Reviews Per Genre", "Reviews Per Category"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         hbc_sp.setAdapter(adapter);
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -83,17 +84,26 @@ public class VizActivity extends AppCompatActivity {
                 if(type==0){
                     name.add(nextLine[0]);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==1){
                     name.add(nextLine[1]);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==2){
                     name.add(nextLine[9]);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
+                }
+                else if(type==3){
+                    name.add(nextLine[0]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
+                }
+                else if (type==4){
+                    name.add(nextLine[1]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
+                }
+                else if (type==5){
+                    name.add(nextLine[9]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
                 }
             }
         }
