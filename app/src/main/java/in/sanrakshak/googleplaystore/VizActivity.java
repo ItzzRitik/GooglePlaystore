@@ -192,12 +192,28 @@ public class VizActivity extends AppCompatActivity {
         l.setEnabled(false);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-
-        entries.add(new PieEntry(400));
-        entries.add(new PieEntry(1400));
-        entries.add(new PieEntry(2400));
-        entries.add(new PieEntry(900));
-        entries.add(new PieEntry(1100));
+        try {
+            String [] nextLine;
+            int lineNumber = 0;
+            int ratings[]={0,0,0,0,0};
+            try{
+                reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
+            }
+            catch (IOException e) { e.printStackTrace(); }
+            while ((nextLine = reader.readNext()) != null) {
+                if(lineNumber++==0){continue;}
+                if(type==0){
+                    ratings[(int)Float.parseFloat(nextLine[2])]++;
+                }
+            }
+            for (int c : ratings) {
+                entries.add(new PieEntry(c));
+                Log.w("coverPic",c+"");
+            }
+        }
+        catch (Exception e) {
+            Log.w("coverPic", e.toString());
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "App Ratings");
         dataSet.setSliceSpace(3f);
@@ -210,7 +226,6 @@ public class VizActivity extends AppCompatActivity {
             colors.add(c);
         colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
-
 
         dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.2f);
