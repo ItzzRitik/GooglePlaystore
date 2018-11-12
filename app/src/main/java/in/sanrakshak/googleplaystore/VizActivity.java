@@ -129,7 +129,7 @@ public class VizActivity extends AppCompatActivity {
                 else if(menuButton.getId()==R.id.pie_ico){
                     setTitle("Pie Charts");
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.pie)));
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.pie));
+                    getWindow().setStatusBarColor(getResources().getColor(R.color.pie_dark));
                     pie_pane.setVisibility(View.VISIBLE);
                 }
             }
