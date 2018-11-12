@@ -180,7 +180,7 @@ public class VizActivity extends AppCompatActivity {
         pie.setRotationAngle(0);
         pie.setRotationEnabled(true);
         pie.setHighlightPerTapEnabled(true);
-        //  pie.setOnChartValueSelectedListener(this);
+        pie.setCenterTextTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf"));
 
         pie.animateY(1400, Easing.EaseInOutQuad);
 
@@ -228,6 +228,7 @@ public class VizActivity extends AppCompatActivity {
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
+        data.setValueTypeface(Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf"));
         data.setValueTextColor(Color.BLACK);
         pie.setData(data);
         pie.highlightValues(null);
