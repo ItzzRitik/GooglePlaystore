@@ -203,7 +203,8 @@ public class VizActivity extends AppCompatActivity {
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 if(type==0){
-                    ratings[(int)Float.parseFloat(nextLine[2])]++;
+                    Log.w("coverPic",Float.parseFloat(nextLine[2])+"");
+                    ratings[(int)(Float.parseFloat(nextLine[2]))]++;
                 }
             }
             for (int c : ratings) {
