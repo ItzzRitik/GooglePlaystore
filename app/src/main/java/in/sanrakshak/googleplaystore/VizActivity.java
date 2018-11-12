@@ -203,8 +203,10 @@ public class VizActivity extends AppCompatActivity {
             while ((nextLine = reader.readNext()) != null) {
                 if(lineNumber++==0){continue;}
                 if(type==0){
-                    Log.w("coverPic",Float.parseFloat(nextLine[2])+"");
-                    ratings[(int)(Float.parseFloat(nextLine[2]))]++;
+                    int rate=(int)Float.parseFloat(nextLine[2]);
+                    Log.w("coverPic",rate+" - "+nextLine[0]);
+                    if(rate==5) ratings[4]++;
+                    else ratings[(int)(Float.parseFloat(nextLine[2]))]++;
                 }
             }
             for (int c : ratings) {
@@ -213,7 +215,7 @@ public class VizActivity extends AppCompatActivity {
             }
         }
         catch (Exception e) {
-            Log.w("coverPic", e.toString());
+            Log.w("coverPic error", e.toString());
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "App Ratings");
