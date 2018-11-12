@@ -1,6 +1,7 @@
 package in.sanrakshak.googleplaystore;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,9 +58,19 @@ public class VizActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         circle_menu=findViewById(R.id.circle_menu);
-        circle_menu.setOnItemClickListener(new CircleMenu.OnItemClickListener() {
+        circle_menu.setEventListener(new CircleMenu.EventListener() {
             @Override
-            public void onItemClick(CircleMenuButton menuButton) {
+            public void onMenuOpenAnimationStart() {}
+            @Override
+            public void onMenuOpenAnimationEnd() { }
+            @Override
+            public void onMenuCloseAnimationStart() { }
+            @Override
+            public void onMenuCloseAnimationEnd() { }
+            @Override
+            public void onButtonClickAnimationStart(@NonNull CircleMenuButton menuButton) {}
+            @Override
+            public void onButtonClickAnimationEnd(@NonNull CircleMenuButton menuButton) {
                 if(menuButton.getId()==R.id.hbc_ico){
                     hbc_pane.setVisibility(View.VISIBLE);
                 }
