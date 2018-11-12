@@ -66,11 +66,11 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //setChart(position);
+                setChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
-        setChart(0);
+        //setChart(0);
     }
     public void setChart(int type){
         name = new ArrayList<>();
@@ -82,16 +82,19 @@ public class VizActivity extends AppCompatActivity {
                 if(lineNumber++==0){continue;}
                 //Log.w("coverPic", type+"");
                 if(type==0){
-                    //data.add(new ValueDataEntry(nextLine[0], Float.parseFloat(nextLine[2])));
                     name.add(nextLine[0]);
                     data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
                     Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==1){
-                    //data.add(new ValueDataEntry(nextLine[1], Float.parseFloat(nextLine[2])));
+                    name.add(nextLine[1]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
                 else if (type==2){
-                    //data.add(new ValueDataEntry(nextLine[9], Float.parseFloat(nextLine[2])));
+                    name.add(nextLine[9]);
+                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
+                    Log.w("coverPic", nextLine[0]+" - "+nextLine[2]);
                 }
             }
         }
@@ -99,7 +102,7 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic", e.toString());
         }
         Toast.makeText(this, "Done - "+name.size(), Toast.LENGTH_SHORT).show();
-        hbc.setData(new BarData(new BarDataSet(data, "Data")));
+        hbc.setData(new BarData(new BarDataSet(data, "Apps")));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         hbc.animateXY(2000, 2000);
         hbc.setVisibleXRangeMaximum(100);

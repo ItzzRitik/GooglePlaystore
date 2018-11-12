@@ -16,7 +16,7 @@
         </activity>
         <activity android:name=".AppActivity" />
         <activity android:name=".VizActivity"
-            android:theme="@style/MainTheme">
+            android:theme="@style/VizTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

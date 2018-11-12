@@ -5,6 +5,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="VizTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
