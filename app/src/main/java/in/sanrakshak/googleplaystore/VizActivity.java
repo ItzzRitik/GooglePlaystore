@@ -153,7 +153,7 @@ public class VizActivity extends AppCompatActivity {
             hbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
         }
         else if(type>=6 && type<=8){
-            hbc.setVisibleYRange(1000,100000, YAxis.AxisDependency.LEFT);
+            hbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
         }
         hbc.animateXY(1000, 1000);
         hbc.moveViewToX(0);
