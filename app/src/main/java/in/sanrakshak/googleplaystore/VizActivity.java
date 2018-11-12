@@ -39,7 +39,8 @@ public class VizActivity extends AppCompatActivity {
     RelativeLayout hbc_pane,vbc_pane;
     CSVReader reader;
     Spinner hbc_sp,vbc_sp;
-    ArrayList<String> name,nameV;
+    ArrayList<String> name;
+    ArrayList<BarEntry> data;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
     "Current Ver","Android Ver"};
     String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
@@ -114,7 +115,7 @@ public class VizActivity extends AppCompatActivity {
         vbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setVBCChart(position);
+                setBarChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
@@ -126,105 +127,12 @@ public class VizActivity extends AppCompatActivity {
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                setHBCChart(position);
+                setBarChart(position);
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
     }
-    public void setVBCChart(int type) {
-        int wordLen=15;
-        nameV = new ArrayList<>();
-        ArrayList<BarEntry> data = new ArrayList<>();
-        try {
-            String [] nextLine;
-            int lineNumber = 0;
-            try{
-                reader = new CSVReader(new InputStreamReader(getAssets().open("appdata.csv")));
-            }
-            catch (IOException e) { e.printStackTrace(); }
-            while ((nextLine = reader.readNext()) != null) {
-                if(lineNumber++==0){continue;}
-                //Log.w("coverPic", type+"");
-                if(type==0){
-                    String temp=nextLine[0];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                }
-                else if (type==1){
-                    String temp=nextLine[1];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                }
-                else if (type==2){
-                    String temp=nextLine[9];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[2])));
-                }
-                else if(type==3){
-                    String temp=nextLine[0];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
-                }
-                else if (type==4){
-                    String temp=nextLine[1];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
-                }
-                else if (type==5){
-                    String temp=nextLine[9];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Float.parseFloat(nextLine[3])));
-                }
-                else if(type==6){
-                    String temp=nextLine[0];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
-                }
-                else if (type==7){
-                    String temp=nextLine[1];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
-                }
-                else if (type==8){
-                    String temp=nextLine[9];
-                    if(temp.length()>wordLen){temp=temp.substring(0,wordLen);}
-                    nameV.add(temp);
-                    data.add(new BarEntry(lineNumber, Integer.parseInt((nextLine[3].replace("+","")).replaceAll(",",""))));
-
-                }
-            }
-        }
-        catch (Exception e) {
-            Log.w("coverPic", e.toString());
-        }
-        Toast.makeText(this, "Number of data - "+nameV.size(), Toast.LENGTH_SHORT).show();
-        BarDataSet dataSet = new BarDataSet(data, "Score");
-        dataSet.setColor(getResources().getColor(R.color.vbc));
-        vbc.setData(new BarData(dataSet));
-        vbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(nameV));
-        vbc.setVisibleXRange(1000,10);
-        if(type>=0 && type<=2){
-            vbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
-        }
-        else if(type>=3 && type<=5){
-            vbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
-        }
-        else if(type>=6 && type<=8){
-            vbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
-        }
-        vbc.animateXY(1000, 1000);
-        vbc.moveViewToX(0);
-        vbc.invalidate();
-    }
-    public void setHBCChart(int type){
+    public void setBarChart(int type){
         int wordLen=15;
         name = new ArrayList<>();
         ArrayList<BarEntry> data = new ArrayList<>();
@@ -303,7 +211,6 @@ public class VizActivity extends AppCompatActivity {
         dataSet.setColor(getResources().getColor(R.color.hbc));
         hbc.setData(new BarData(dataSet));
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
-        hbc.setVisibleXRange(1000,10);
         if(type>=0 && type<=2){
             hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
         }
@@ -316,6 +223,21 @@ public class VizActivity extends AppCompatActivity {
         hbc.animateXY(1000, 1000);
         hbc.moveViewToX(0);
         hbc.invalidate();
+
+        vbc.setData(new BarData(dataSet));
+        vbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
+        if(type>=0 && type<=2){
+            vbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
+        }
+        else if(type>=3 && type<=5){
+            vbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
+        }
+        else if(type>=6 && type<=8){
+            vbc.setVisibleYRange(1000,300000, YAxis.AxisDependency.LEFT);
+        }
+        vbc.animateXY(1000, 1000);
+        vbc.moveViewToX(0);
+        vbc.invalidate();
     }
     public class BarChartXaxisFormatter implements IAxisValueFormatter {
         ArrayList<String> mValues;
