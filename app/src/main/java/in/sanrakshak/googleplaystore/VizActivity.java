@@ -332,9 +332,9 @@ public class VizActivity extends AppCompatActivity {
             Log.w("coverPic", e.toString());
         }
         Toast.makeText(this, "Number of data - "+name.size(), Toast.LENGTH_SHORT).show();
-        BarDataSet dataSet = new BarDataSet(data, "Score");
-        dataSet.setColor(getResources().getColor(R.color.hbc));
-        hbc.setData(new BarData(dataSet));
+        BarDataSet dataSetH = new BarDataSet(data, "Score");
+        dataSetH.setColor(getResources().getColor(R.color.hbc));
+        hbc.setData(new BarData(dataSetH));
         hbc.setVisibleXRange(1000,8);
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         if(type>=0 && type<=2){
@@ -350,8 +350,9 @@ public class VizActivity extends AppCompatActivity {
         hbc.moveViewToX(0);
         hbc.invalidate();
 
-        dataSet.setColor(getResources().getColor(R.color.vbc));
-        vbc.setData(new BarData(dataSet));
+        BarDataSet dataSetV = new BarDataSet(data, "Score");
+        dataSetV.setColor(getResources().getColor(R.color.vbc));
+        vbc.setData(new BarData(dataSetV));
         vbc.setVisibleXRange(1000,3);
         vbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         if(type>=0 && type<=2){
