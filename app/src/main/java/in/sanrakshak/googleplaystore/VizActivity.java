@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.YAxis;
@@ -33,12 +35,17 @@ import java.util.Objects;
 public class VizActivity extends AppCompatActivity {
     CircleMenu circle_menu;
     HorizontalBarChart hbc;
-    RelativeLayout hbc_pane;
+    BarChart vbc;
+    RelativeLayout hbc_pane,vbc_pane;
     CSVReader reader;
-    Spinner hbc_sp;
+    Spinner hbc_sp,vbc_sp;
     ArrayList<String> name;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
     "Current Ver","Android Ver"};
+    String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
+            "Reviews Per Application","Reviews Per Genre", "Reviews Per Category",
+            "Installs Per Application","Installs Per Genre","Installs Per Category"};
+    ArrayAdapter<String> adapter;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -46,8 +53,24 @@ public class VizActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.exit_in, R.anim.exit_out);
+        if(getTitle().equals("Visualize Store")){
+            finish();
+            overridePendingTransition(R.anim.exit_in, R.anim.exit_out);
+        }
+        else{
+            hbc_pane.setVisibility(View.GONE);
+            vbc_pane.setVisibility(View.GONE);
+            //pie_pane.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +95,31 @@ public class VizActivity extends AppCompatActivity {
             @Override
             public void onButtonClickAnimationEnd(@NonNull CircleMenuButton menuButton) {
                 if(menuButton.getId()==R.id.hbc_ico){
+                    setTitle("Horizontal Bars");
                     hbc_pane.setVisibility(View.VISIBLE);
                 }
+                else if(menuButton.getId()==R.id.vbc_ico){
+                    setTitle("Vertical Bars");
+                    vbc_pane.setVisibility(View.VISIBLE);
+                }
             }
+        });
+        vbc_pane=findViewById(R.id.vbc_pane);
+        vbc = findViewById(R.id.vbc);
+        vbc_sp=findViewById(R.id.vbc_sp);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        vbc_sp.setAdapter(adapter);
+        vbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                setVBCChart(position);
+            }
+            public void onNothingSelected(AdapterView<?> parent){}
         });
 
         hbc_pane=findViewById(R.id.hbc_pane);
         hbc = findViewById(R.id.hbc);
         hbc_sp=findViewById(R.id.hbc_sp);
-        String[] items = new String[]{"Ratings Per Application", "Ratings Per Genre", "Ratings Per Category",
-        "Reviews Per Application","Reviews Per Genre", "Reviews Per Category",
-        "Installs Per Application","Installs Per Genre","Installs Per Category"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         hbc_sp.setAdapter(adapter);
         hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -92,6 +128,9 @@ public class VizActivity extends AppCompatActivity {
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
+    }
+    public void setVBCChart(int type) {
+
     }
     public void setHBCChart(int type){
         int wordLen=15;
