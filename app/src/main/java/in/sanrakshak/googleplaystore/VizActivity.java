@@ -43,6 +43,7 @@ import com.opencsv.CSVReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -225,8 +226,6 @@ public class VizActivity extends AppCompatActivity {
                 else if(type==1){
                     if(nextLine[6].toLowerCase().equals("free")){premium_type[0]++;}
                     else premium_type[1]++;
-
-                    Log.w("coverPic",nextLine[6]+" - "+nextLine[6].toLowerCase().equals("free"));
                 }
             }
             if(type==0){
@@ -235,8 +234,8 @@ public class VizActivity extends AppCompatActivity {
                 }
             }
             else if(type==1){
-                entries.add(new PieEntry(premium_type[0],"Free"));
-                entries.add(new PieEntry(premium_type[1],"Premium"));
+                entries.add(new PieEntry(premium_type[0],"Free - "+premium_type[0]+" Apps"));
+                entries.add(new PieEntry(premium_type[1],"Premium - "+premium_type[1]+" Apps"));
             }
 
         }
@@ -253,7 +252,16 @@ public class VizActivity extends AppCompatActivity {
         ArrayList<Integer> colors = new ArrayList<>();
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
         colors.add(ColorTemplate.getHoloBlue());
+        Collections.shuffle(colors);
         dataSet.setColors(colors);
 
         dataSet.setValueLinePart1OffsetPercentage(80.f);
