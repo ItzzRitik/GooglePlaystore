@@ -133,7 +133,7 @@ public class VizActivity extends AppCompatActivity {
         });
     }
     public void setBarChart(int type){
-        int wordLen=15;
+        int wordLen=10;
         name = new ArrayList<>();
         ArrayList<BarEntry> data = new ArrayList<>();
         try {
@@ -210,6 +210,7 @@ public class VizActivity extends AppCompatActivity {
         BarDataSet dataSet = new BarDataSet(data, "Score");
         dataSet.setColor(getResources().getColor(R.color.hbc));
         hbc.setData(new BarData(dataSet));
+        hbc.setVisibleXRange(1000,3);
         hbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         if(type>=0 && type<=2){
             hbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
@@ -224,7 +225,9 @@ public class VizActivity extends AppCompatActivity {
         hbc.moveViewToX(0);
         hbc.invalidate();
 
+        dataSet.setColor(getResources().getColor(R.color.vbc));
         vbc.setData(new BarData(dataSet));
+        vbc.setVisibleXRange(1000,3);
         vbc.getXAxis().setValueFormatter(new BarChartXaxisFormatter(name));
         if(type>=0 && type<=2){
             vbc.setVisibleYRange(6,6, YAxis.AxisDependency.LEFT);
