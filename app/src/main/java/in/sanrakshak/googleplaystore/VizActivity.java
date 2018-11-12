@@ -78,6 +78,8 @@ public class VizActivity extends AppCompatActivity {
             vbc_pane.setVisibility(View.GONE);
             pie_pane.setVisibility(View.GONE);
             setTitle("Visualize Store");
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
             circle_menu.open(true);
         }
     }
@@ -115,17 +117,19 @@ public class VizActivity extends AppCompatActivity {
                 if(menuButton.getId()==R.id.hbc_ico){
                     setTitle("Horizontal Bars");
                     getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.hbc)));
-
+                    getWindow().setStatusBarColor(getResources().getColor(R.color.hbc_dark));
                     hbc_pane.setVisibility(View.VISIBLE);
                 }
                 else if(menuButton.getId()==R.id.vbc_ico){
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.vbc)));
                     setTitle("Vertical Bars");
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.vbc)));
+                    getWindow().setStatusBarColor(getResources().getColor(R.color.vbc_dark));
                     vbc_pane.setVisibility(View.VISIBLE);
                 }
                 else if(menuButton.getId()==R.id.pie_ico){
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.pie)));
                     setTitle("Pie Charts");
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.pie)));
+                    getWindow().setStatusBarColor(getResources().getColor(R.color.pie));
                     pie_pane.setVisibility(View.VISIBLE);
                 }
             }
