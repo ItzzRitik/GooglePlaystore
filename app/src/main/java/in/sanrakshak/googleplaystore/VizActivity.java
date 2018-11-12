@@ -1,9 +1,14 @@
 package in.sanrakshak.googleplaystore;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.imangazaliev.circlemenu.CircleMenu;
 import com.imangazaliev.circlemenu.CircleMenuButton;
 import com.opencsv.CSVReader;
@@ -36,9 +45,10 @@ public class VizActivity extends AppCompatActivity {
     CircleMenu circle_menu;
     HorizontalBarChart hbc;
     BarChart vbc;
-    RelativeLayout hbc_pane,vbc_pane;
+    PieChart pie;
+    RelativeLayout hbc_pane,vbc_pane,pie_pane;
     CSVReader reader;
-    Spinner hbc_sp,vbc_sp;
+    Spinner hbc_sp,vbc_sp,pie_sp;
     ArrayList<String> name;
     ArrayList<BarEntry> data;
     String heads[]={"App","Category","Rating","Reviews","Size","Installs","Type","Price","Content Rating","Genres","Last Updated",
@@ -61,9 +71,9 @@ public class VizActivity extends AppCompatActivity {
         else{
             hbc_pane.setVisibility(View.GONE);
             vbc_pane.setVisibility(View.GONE);
+            pie_pane.setVisibility(View.GONE);
             setTitle("Visualize Store");
             circle_menu.open(true);
-            //pie_pane.setVisibility(View.GONE);
         }
     }
     @Override
@@ -105,8 +115,13 @@ public class VizActivity extends AppCompatActivity {
                     setTitle("Vertical Bars");
                     vbc_pane.setVisibility(View.VISIBLE);
                 }
+                else if(menuButton.getId()==R.id.pie_ico){
+                    setTitle("Pie Charts");
+                    pie_pane.setVisibility(View.VISIBLE);
+                }
             }
         });
+
         vbc_pane=findViewById(R.id.vbc_pane);
         vbc = findViewById(R.id.vbc);
         vbc_sp=findViewById(R.id.vbc_sp);
@@ -131,6 +146,57 @@ public class VizActivity extends AppCompatActivity {
             }
             public void onNothingSelected(AdapterView<?> parent){}
         });
+
+        pie_pane=findViewById(R.id.pie_pane);
+        pie = findViewById(R.id.pie);
+        pie_sp=findViewById(R.id.pie_sp);
+        pie_sp.setAdapter(adapter);
+        hbc_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                setBarChart(position);
+            }
+            public void onNothingSelected(AdapterView<?> parent){}
+        });
+    }
+    public void setPieChart(){
+        pie.setUsePercentValues(true);
+        pie.getDescription().setEnabled(false);
+        pie.setExtraOffsets(5, 10, 5, 5);
+        pie.setDragDecelerationFrictionCoef(0.95f);
+        pie.setCenterText(generateCenterSpannableText());
+        pie.setExtraOffsets(20.f, 0.f, 20.f, 0.f);
+        pie.setDrawHoleEnabled(true);
+        pie.setHoleColor(Color.WHITE);
+        pie.setTransparentCircleColor(Color.WHITE);
+        pie.setTransparentCircleAlpha(110);
+        pie.setHoleRadius(58f);
+        pie.setTransparentCircleRadius(61f);
+        pie.setDrawCenterText(true);
+        pie.setRotationAngle(0);
+        pie.setRotationEnabled(true);
+        pie.setHighlightPerTapEnabled(true);
+        //  pie.setOnChartValueSelectedListener(this);
+
+        pie.animateY(1400, Easing.EaseInOutQuad);
+
+        Legend l = pie.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setEnabled(false);
+    }
+    private SpannableString generateCenterSpannableText() {
+
+        SpannableString s = new SpannableString("Store PieChart\ndeveloped by Ritik Srivastava");
+        s.setSpan(new RelativeSizeSpan(1.5f), 0, 14, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
+        s.setSpan(new RelativeSizeSpan(.65f), 14, s.length() - 15, 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
+        return s;
     }
     public void setBarChart(int type){
         int wordLen=10;
